@@ -9,8 +9,8 @@ export default function Home() {
   return (
     <div className="h-screen w-screen">
       <Header />
-      <div className="px-60 mt-28 flex flex-col gap-8">
-        <div className="flex gap-4 w-full justify-center">
+      <div className="mt-28 flex flex-col gap-8 xs:px-4 lg:px-30 xl:px-60">
+        <div className="flex gap-4 w-full justify-center xs:flex-col md:flex-row">
           <MenuBanner
             title="Clientes"
             image={ClientPhoto}
@@ -22,7 +22,7 @@ export default function Home() {
             description="Os condutores são indivíduos responsáveis ​​pela operação e condução segura de veículos, como carros, ônibus ou caminhões. Eles possuem as técnicas necessárias para garantir a segurança no transporte de mercadorias."
           />
         </div>
-        <div className="flex gap-4 w-full justify-center">
+        <div className="flex gap-4 w-full justify-center xs:flex-col xs:mb-28 md:flex-row xl:mb-0">
           <MenuBanner
             title="Veiculos"
             image={CarPhoto}

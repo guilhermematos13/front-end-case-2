@@ -11,7 +11,10 @@ export function Header() {
               <Menu />
             </IconButton>
           </div>
-          <Typography variant="h5" className="text-slate-100">
+          <Typography
+            variant="h5"
+            className="text-slate-100 xs:text-sm text-center sm:text-lg md:text-2xl"
+          >
             Gestão de Deslocamento
           </Typography>
           <div className="w-6 h-6"></div>

@@ -12,7 +12,10 @@ module.exports = {
         'green-primary': '#1FAF9D',
         'white-primary': '#F5F5F5'
       },
-      backgroundImage: {}
+      backgroundImage: {},
+      screens: {
+        xs: '320px'
+      }
     }
   },
   plugins: []
