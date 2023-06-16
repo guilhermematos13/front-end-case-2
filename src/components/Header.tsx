@@ -1,14 +1,20 @@
-import { Button } from '@mui/material';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { AppBar, Box, IconButton, Toolbar, Typography } from '@mui/material';
+import { Menu } from '@mui/icons-material';
 
 export function Header() {
   return (
-    <div className="w-screen flex items-center justify-between bg-slate-800 px-28 py-4">
-      <h1 className="text-xl text-slate-300 font-bold">API - Deslocamento</h1>
-      <Button className="normal-case px-4 py-2 flex gap-2 items-center bg-blue-500 text-slate-300 hover:bg-blue-600 hover:transition-colors">
-        <AddCircleOutlineIcon className="w-5 h-5" />
-        Criar um novo Deslocamento
-      </Button>
-    </div>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static" className="bg-blue-primary">
+        <Toolbar className="flex justify-between px-14">
+          <div>
+            <IconButton className="text-slate-100 hover:bg-slate-100/10 rounded-full">
+              <Menu />
+            </IconButton>
+          </div>
+          <Typography variant="h5">Gestão de Deslocamento</Typography>
+          <div className="w-6 h-6"></div>
+        </Toolbar>
+      </AppBar>
+    </Box>
   );
 }
