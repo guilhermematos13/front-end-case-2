@@ -1,3 +1,4 @@
+import Header from '../components/Header';
 import '../styles/globals.css';
 import { Roboto } from 'next/font/google';
 
@@ -14,8 +15,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR">
-      <body className={roboto.className}>{children}</body>
+    <html lang="en" suppressHydrationWarning={true}>
+      <body className={roboto.className}>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }

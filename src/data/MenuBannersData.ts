@@ -17,7 +17,7 @@ export const MenuBannersData: MenuBannersDataProps[] = [
     image: ClientPhoto,
     description:
       'Os clientes são a base de qualquer negócio, representando aqueles que buscam produtos e serviços para atender às suas necessidades. Eles são indivíduos ou organizações em busca de soluções, conveniência e qualidade.',
-    route: '/clients'
+    route: '/clients',
   },
   {
     title: 'Condutores',
