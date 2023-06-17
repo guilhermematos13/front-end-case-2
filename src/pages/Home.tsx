@@ -1,38 +1,16 @@
 import { Header } from '../components/Header';
 import { MenuBanner } from '../components/MenuBanner';
-import ClientPhoto from '../../public/client.png';
-import CarPhoto from '../../public/car.png';
-import DriverPhoto from '../../public/driver.png';
-import RoadPhoto from '../../public/road.png';
+import { MenuBannersData } from '../data/MenuBannersData';
 
 export default function Home() {
   return (
     <div className="h-screen w-screen">
       <Header />
       <div className="mt-28 flex flex-col gap-8 xs:px-4 lg:px-30 xl:px-60">
-        <div className="flex gap-4 w-full justify-center xs:flex-col md:flex-row">
-          <MenuBanner
-            title="Clientes"
-            image={ClientPhoto}
-            description="Os clientes são a base de qualquer negócio, representando aqueles que buscam produtos e serviços para atender às suas necessidades. Eles são indivíduos ou organizações em busca de soluções, conveniência e qualidade. "
-          />
-          <MenuBanner
-            title="Condutores"
-            image={DriverPhoto}
-            description="Os condutores são indivíduos responsáveis ​​pela operação e condução segura de veículos, como carros, ônibus ou caminhões. Eles possuem as técnicas necessárias para garantir a segurança no transporte de mercadorias."
-          />
-        </div>
-        <div className="flex gap-4 w-full justify-center xs:flex-col xs:mb-28 md:flex-row xl:mb-0">
-          <MenuBanner
-            title="Veiculos"
-            image={CarPhoto}
-            description="Veículos são meios de transporte que proporcionam mobilidade e transporte de pessoas e/ou carga. Eles vêm em diferentes formas, como carros, caminhões, motocicletas, bicicletas, ônibus e trens, entre outros. "
-          />
-          <MenuBanner
-            title="Deslocamentos"
-            image={RoadPhoto}
-            description="Deslocamentos referem-se aos movimentos físicos de pessoas ou objetos de um local para outro. Essas viagens podem ser realizadas por diversos meios de transporte, como veículos, transporte público, bicicletas ou a pé."
-          />
+        <div className="gap-4 w-full justify-center xs:flex xs:flex-col md:grid md:grid-cols-2 xs:mb-28 xl:mb-0">
+          {MenuBannersData.map((data) => (
+            <MenuBanner description={data.description} image={data.image} title={data.title} route={data.route}/>
+          ))}
         </div>
       </div>
     </div>
