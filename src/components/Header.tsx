@@ -19,38 +19,52 @@ import {
   ArrowBackIosNew,
   DirectionsCar,
   Menu,
-  Person
+  Person, 
+  Home
 } from '@mui/icons-material';
 import { useState } from 'react';
 import { MenuBannersData } from '../data/MenuBannersData';
 import { useRouter } from 'next/navigation';
 
 export default function Header() {
+  const Route = useRouter();
   const [openSideMenu, setOpenSideMenu] = useState(false);
 
-  const handleSideMenuOpen = () => {
-    setOpenSideMenu(true);
+  const handleSideMenuChange = () => {
+    setOpenSideMenu((prev) => !prev);
   };
 
-  const handleSideMenuClose = () => {
+  const handleRedirectPage = (url: string) => {
+    Route.push(url);
     setOpenSideMenu(false);
   };
 
-  const Route = useRouter();
-
   return (
     <div>
-      <Drawer anchor="left" open={openSideMenu} onClose={handleSideMenuClose}>
+      <Drawer anchor="left" open={openSideMenu} onClose={handleSideMenuChange}>
         <List className="bg-slate-300/50 h-screen flex flex-col items-end px-4">
-          <button onClick={handleSideMenuClose}>
+          <button onClick={handleSideMenuChange}>
             <ArrowBackIosNew className="h-6 w-6 text-blue-primary hover:text-green-primary" />
           </button>
+          <ListItem>
+            <ListItemButton
+              onClick={() => {
+                handleRedirectPage('/');
+              }}
+              className="rounded-md hover:bg-green-primary/50"
+            >
+              <ListItemIcon className="text-blue-primary">
+                  <Home />
+              </ListItemIcon>
+              <ListItemText primary={'Home'} />
+            </ListItemButton>
+          </ListItem>
           {MenuBannersData.map((menu, index) => {
             return (
               <ListItem key={index}>
                 <ListItemButton
                   onClick={() => {
-                    Route.push(`${menu.route}`);
+                    handleRedirectPage(menu.route);
                   }}
                   className="rounded-md hover:bg-green-primary/50"
                 >
@@ -77,9 +91,7 @@ export default function Header() {
           <Toolbar className="flex justify-between px-14">
             <div>
               <IconButton
-                onClick={() => {
-                  handleSideMenuOpen();
-                }}
+                onClick={handleSideMenuChange}
                 className="text-slate-100 hover:bg-slate-100/10 rounded-full"
               >
                 <Menu />
