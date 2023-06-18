@@ -1,33 +1,33 @@
-import Image, { StaticImageData } from 'next/image';
-import { MenuButton } from './MenuButton';
-import { useRouter } from 'next/navigation';
+import Image, { StaticImageData } from 'next/image'
+import { MenuButton } from './MenuButton'
+import { useRouter } from 'next/navigation'
 
 interface MenuBannerProps {
-  title: string;
-  image: StaticImageData;
-  description: string;
-  route: string;
+  title: string
+  image: StaticImageData
+  description: string
+  route: string
 }
 
 export function MenuBanner({
   title,
   image,
   description,
-  route
+  route,
 }: MenuBannerProps) {
-  const Route = useRouter();
+  const Route = useRouter()
 
   return (
-    <div className="p-6 flex flex-col items-center justify-center bg-gray-200 rounded-md xs:w-full">
-      <Image src={image} alt="" className="w-20 h-20" />
-      <strong className="text-2xl text-green-primary mt-6">{title}</strong>
-      <p className="mt-3 text-center mb-6">{description}</p>
+    <div className="flex flex-col items-center justify-center rounded-md bg-gray-200 p-6 xs:w-full">
+      <Image src={image} alt="" className="h-20 w-20" />
+      <strong className="mt-6 text-2xl text-green-primary">{title}</strong>
+      <p className="mb-6 mt-3 text-center">{description}</p>
       <MenuButton
         onClick={() => {
-          Route.push(`${route}`);
+          Route.push(`${route}`)
         }}
         title={`Detalhes ${title}`}
       />
     </div>
-  );
+  )
 }

@@ -1,12 +1,10 @@
+import { ReactNode } from 'react'
+
 export const metadata = {
   title: 'Deslocamento',
-  description: 'Administrar dados de deslocamento'
-};
+  description: 'Administrar dados de deslocamento',
+}
 
-export default function RootLayout({
-  children
-}: {
-  children: React.ReactNode;
-}) {
-  return children;
+export default function RootLayout({ children }: { children: ReactNode }) {
+  return children
 }

@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import {
   AppBar,
@@ -11,50 +11,50 @@ import {
   ListItemIcon,
   ListItemText,
   Toolbar,
-  Typography
-} from '@mui/material';
+  Typography,
+} from '@mui/material'
 import {
   AddRoad,
   AirlineSeatReclineExtra,
   ArrowBackIosNew,
   DirectionsCar,
   Menu,
-  Person, 
-  Home
-} from '@mui/icons-material';
-import { useState } from 'react';
-import { MenuBannersData } from '../data/MenuBannersData';
-import { useRouter } from 'next/navigation';
+  Person,
+  Home,
+} from '@mui/icons-material'
+import { useState } from 'react'
+import { MenuBannersData } from '../data/MenuBannersData'
+import { useRouter } from 'next/navigation'
 
 export default function Header() {
-  const Route = useRouter();
-  const [openSideMenu, setOpenSideMenu] = useState(false);
+  const Route = useRouter()
+  const [openSideMenu, setOpenSideMenu] = useState(false)
 
   const handleSideMenuChange = () => {
-    setOpenSideMenu((prev) => !prev);
-  };
+    setOpenSideMenu((prev) => !prev)
+  }
 
   const handleRedirectPage = (url: string) => {
-    Route.push(url);
-    setOpenSideMenu(false);
-  };
+    Route.push(url)
+    setOpenSideMenu(false)
+  }
 
   return (
     <div>
       <Drawer anchor="left" open={openSideMenu} onClose={handleSideMenuChange}>
-        <List className="bg-slate-300/50 h-screen flex flex-col items-end px-4">
+        <List className="flex h-screen flex-col items-end bg-slate-300/50 px-4">
           <button onClick={handleSideMenuChange}>
             <ArrowBackIosNew className="h-6 w-6 text-blue-primary hover:text-green-primary" />
           </button>
           <ListItem>
             <ListItemButton
               onClick={() => {
-                handleRedirectPage('/');
+                handleRedirectPage('/')
               }}
               className="rounded-md hover:bg-green-primary/50"
             >
               <ListItemIcon className="text-blue-primary">
-                  <Home />
+                <Home />
               </ListItemIcon>
               <ListItemText primary={'Home'} />
             </ListItemButton>
@@ -64,7 +64,7 @@ export default function Header() {
               <ListItem key={index}>
                 <ListItemButton
                   onClick={() => {
-                    handleRedirectPage(menu.route);
+                    handleRedirectPage(menu.route)
                   }}
                   className="rounded-md hover:bg-green-primary/50"
                 >
@@ -82,7 +82,7 @@ export default function Header() {
                   <ListItemText primary={menu.title} />
                 </ListItemButton>
               </ListItem>
-            );
+            )
           })}
         </List>
       </Drawer>
@@ -92,21 +92,21 @@ export default function Header() {
             <div>
               <IconButton
                 onClick={handleSideMenuChange}
-                className="text-slate-100 hover:bg-slate-100/10 rounded-full"
+                className="rounded-full text-slate-100 hover:bg-slate-100/10"
               >
                 <Menu />
               </IconButton>
             </div>
             <Typography
               variant="h5"
-              className="text-slate-100 xs:text-sm text-center sm:text-lg md:text-2xl"
+              className="text-center text-slate-100 xs:text-sm sm:text-lg md:text-2xl"
             >
               Gestão de Deslocamento
             </Typography>
-            <div className="w-6 h-6"></div>
+            <div className="h-6 w-6"></div>
           </Toolbar>
         </AppBar>
       </Box>
     </div>
-  );
+  )
 }
