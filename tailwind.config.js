@@ -3,20 +3,20 @@ module.exports = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}'
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
       colors: {
         'blue-primary': '#5A4EE1',
         'green-primary': '#1FAF9D',
-        'white-primary': '#F5F5F5'
+        'white-primary': '#F5F5F5',
       },
       backgroundImage: {},
       screens: {
-        xs: '320px'
-      }
-    }
+        xs: '320px',
+      },
+    },
   },
-  plugins: []
-};
+  plugins: [],
+}
