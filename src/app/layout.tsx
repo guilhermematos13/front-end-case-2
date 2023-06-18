@@ -3,7 +3,7 @@ import Header from '../components/Header'
 import '../styles/globals.css'
 import { Roboto } from 'next/font/google'
 
-const roboto = Roboto({ weight: ['400', '700', '500'], subsets: ['latin'] })
+const roboto = Roboto({ weight: ['400', '500', '700'], subsets: ['latin'] })
 
 export const metadata = {
   title: 'Create Next App',
