@@ -11,6 +11,7 @@ import { SelectDocumentData } from '../../../data/SelectDocumentData'
 import { CityStateListProps, ModalClientProps, UfListProps } from './interface'
 import { Alert, MenuItem, SelectChangeEvent, Typography } from '@mui/material'
 import { PaperPlaneRight, X } from '@phosphor-icons/react'
+import { InputMaskCNPJ } from '../../../components/InputMaskCNPJ'
 
 export function ModalClient({ handleCloseModal, openModal }: ModalClientProps) {
   const [ufList, setUfList] = useState<UfListProps[]>([])
@@ -96,8 +97,16 @@ export function ModalClient({ handleCloseModal, openModal }: ModalClientProps) {
               <Label title="Número do Documento:" htmlFor="document" />
               {documentOption === 'RG' ? (
                 <InputMaskRG id="document" name="document" />
-              ) : (
+              ) : documentOption === 'CPF' ? (
                 <InputMaskCPF id="document" name="document" />
+              ) : documentOption === 'CNPJ' ? (
+                <InputMaskCNPJ id="document" name="document" />
+              ) : (
+                <Input
+                  id="document"
+                  name="document"
+                  placeholder="Digite seu Documento"
+                />
               )}
             </div>
           </div>
@@ -147,8 +156,9 @@ export function ModalClient({ handleCloseModal, openModal }: ModalClientProps) {
           <div className="mt-8 flex w-full justify-center">
             <Button
               onClick={() => {}}
-              className="w-1/2"
+              className="w-1/3"
               title="Enviar"
+              type="submit"
               icon={<PaperPlaneRight />}
             />
           </div>
