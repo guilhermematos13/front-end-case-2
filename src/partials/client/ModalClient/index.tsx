@@ -61,7 +61,7 @@ export function ModalClient({ handleCloseModal, openModal }: ModalClientProps) {
   return (
     <Modal closeModal={handleCloseModal} openModal={openModal}>
       <div className="flex items-start justify-between">
-        <Typography className="text-2xl font-bold text-blue-primary xs:text-sm">
+        <Typography className="font-bold text-blue-primary xs:text-xl md:text-2xl">
           Criar novo Cliente
         </Typography>
         <button
@@ -76,7 +76,7 @@ export function ModalClient({ handleCloseModal, openModal }: ModalClientProps) {
         <div className="flex w-full flex-col">
           <Label title="Nome:" htmlFor="name" />
           <Input placeholder="Digite seu nome" id="name" />
-          <div className="flex  w-full gap-4">
+          <div className="flex  w-full gap-4 xs:flex-col xl:flex-row">
             <div className="flex flex-1 flex-col">
               <Label title="Selecione o Documento:" htmlFor="document" />
               <Select
@@ -101,7 +101,7 @@ export function ModalClient({ handleCloseModal, openModal }: ModalClientProps) {
               )}
             </div>
           </div>
-          <div className="grid grid-cols-3 gap-2">
+          <div className="gap-2 xs:flex xs:flex-col md:grid md:grid-cols-3">
             <div className="flex flex-col">
               <Label title="UF:" />
               <Select value={ufOption} onChange={handleChangeSelectUfOption}>
