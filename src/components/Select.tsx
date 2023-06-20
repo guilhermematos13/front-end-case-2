@@ -3,7 +3,7 @@ import {
   SelectChangeEvent,
   Select as SelectMaterial,
 } from '@mui/material'
-import { ReactNode } from 'react'
+import { ForwardedRef, ReactNode } from 'react'
 
 interface SelectProps {
   value: string
@@ -11,7 +11,10 @@ interface SelectProps {
   children: ReactNode
 }
 
-export function Select({ value, onChange, children }: SelectProps) {
+export function Select(
+  { value, onChange, children }: SelectProps,
+  ref: ForwardedRef<never>,
+) {
   return (
     <div>
       <SelectMaterial
@@ -19,7 +22,7 @@ export function Select({ value, onChange, children }: SelectProps) {
         value={value}
         onChange={onChange}
       >
-        <MenuItem>
+        <MenuItem disabled value="">
           <em>Nenhuma das Opções</em>
         </MenuItem>
         {children}

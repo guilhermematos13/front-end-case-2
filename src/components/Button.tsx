@@ -4,7 +4,7 @@ import { ReactNode } from 'react'
 interface ButtonProps {
   title: string
   icon: ReactNode
-  onClick: () => void
+  onClick?: () => void
   className?: string
   type?: 'button' | 'reset' | 'submit'
 }
