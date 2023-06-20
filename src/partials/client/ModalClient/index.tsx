@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios'
 import { Button } from '../../../components/Button'
 import { Input } from '../../../components/Input'
 import { Label } from '../../../components/Label'
@@ -9,9 +8,10 @@ import { Select } from '../../../components/Select'
 import { Modal } from '../../../components/Modal'
 import { SelectDocumentData } from '../../../data/SelectDocumentData'
 import { CityStateListProps, ModalClientProps, UfListProps } from './interface'
-import { Alert, MenuItem, SelectChangeEvent, Typography } from '@mui/material'
+import { MenuItem, SelectChangeEvent, Typography } from '@mui/material'
 import { PaperPlaneRight, X } from '@phosphor-icons/react'
 import { InputMaskCNPJ } from '../../../components/InputMaskCNPJ'
+import { fetchCityState, fetchUF } from '../../../services/requests/clients'
 
 export function ModalClient({ handleCloseModal, openModal }: ModalClientProps) {
   const [ufList, setUfList] = useState<UfListProps[]>([])
@@ -19,28 +19,6 @@ export function ModalClient({ handleCloseModal, openModal }: ModalClientProps) {
   const [documentOption, setDocumentOption] = useState('')
   const [ufOption, setUfOption] = useState('')
   const [cityStateOption, setCityStateOption] = useState('')
-
-  const fetchUF = () => {
-    axios
-      .get(
-        'https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome',
-      )
-      .then((response) => {
-        setUfList(response.data)
-      })
-      .catch(() => <Alert severity="error">Algo deu Errado!</Alert>)
-  }
-
-  const fetchCityState = (UF: string) => {
-    axios
-      .get(
-        `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${UF}/municipios?orderBy=nome`,
-      )
-      .then((response) => {
-        setCityStateList(response.data)
-      })
-      .catch(() => <Alert severity="error">Algo deu Errado!</Alert>)
-  }
 
   function handleChangeSelectDocumentOption(event: SelectChangeEvent) {
     setDocumentOption(event.target.value)
@@ -55,9 +33,9 @@ export function ModalClient({ handleCloseModal, openModal }: ModalClientProps) {
   }
 
   useEffect(() => {
-    fetchUF()
-    fetchCityState(ufOption)
-  }, [ufOption])
+    fetchUF({ setUfList })
+    fetchCityState({ ufOption, setCityStateList })
+  }, [setUfList, ufOption])
 
   return (
     <Modal closeModal={handleCloseModal} openModal={openModal}>
