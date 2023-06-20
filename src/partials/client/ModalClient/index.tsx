@@ -7,17 +7,16 @@ import { InputMaskCPF } from '../../../components/InputMaskCPF'
 import { Select } from '../../../components/Select'
 import { Modal } from '../../../components/Modal'
 import { SelectDocumentData } from '../../../data/SelectDocumentData'
-import { CityStateListProps, ModalClientProps, UfListProps } from './interface'
-import { MenuItem, Typography } from '@mui/material'
+import { CityListProps, ModalClientProps, UfListProps } from './interface'
+import { MenuItem, SelectChangeEvent, Typography } from '@mui/material'
 import { PaperPlaneRight, X } from '@phosphor-icons/react'
 import { InputMaskCNPJ } from '../../../components/InputMaskCNPJ'
-import { fetchCityState, fetchUF } from '../../../services/requests/clients'
+import { fetchCity, fetchUF } from '../../../services/requests/clients'
 import { useForm } from 'react-hook-form'
-import { ClientInterface } from '../../../services/requests/clients/interface'
 
 export function ModalClient({ handleCloseModal, openModal }: ModalClientProps) {
   const [ufList, setUfList] = useState<UfListProps[]>([])
-  const [cityStateList, setCityStateList] = useState<CityStateListProps[]>([])
+  const [cityList, setCityList] = useState<CityListProps[]>([])
 
   const {
     register,
@@ -25,7 +24,18 @@ export function ModalClient({ handleCloseModal, openModal }: ModalClientProps) {
     setValue,
     watch,
     formState: { errors },
-  } = useForm()
+  } = useForm({
+    defaultValues: {
+      document: '',
+      uf: '',
+      name: '',
+      documentType: '',
+      city: '',
+      neighborhood: '',
+      address: '',
+      number: '',
+    },
+  })
 
   const handleSubmitData = (data: any) => {
     console.log(data)
@@ -33,8 +43,15 @@ export function ModalClient({ handleCloseModal, openModal }: ModalClientProps) {
 
   useEffect(() => {
     fetchUF({ setUfList })
-    fetchCityState({ ufOption: watch('UF'), setCityStateList })
-  }, [setUfList, watch])
+  }, [setUfList])
+
+  const getCity = (uf: string) => {
+    fetchCity({ ufOption: uf, setCityList })
+  }
+
+  const saveDocument = (event: SelectChangeEvent) => {
+    setValue('document', event.target.value)
+  }
 
   return (
     <Modal closeModal={handleCloseModal} openModal={openModal}>
@@ -86,24 +103,56 @@ export function ModalClient({ handleCloseModal, openModal }: ModalClientProps) {
                   )
                 })}
               </Select>
+              {errors.documentType && (
+                <span className="-mt-3 mb-2 text-xs text-red-500">
+                  Esse campo é obrigatório
+                </span>
+              )}
             </div>
             <div className="flex flex-col">
               <Label title="Número do Documento:" htmlFor="document" />
               {watch('documentType') === 'RG' ? (
-                <InputMaskRG id="document" name="document" />
+                <InputMaskRG
+                  id="document"
+                  name="document"
+                  {...register('document', {
+                    required: 'Esse campo é obrigatório',
+                  })}
+                  onChange={saveDocument}
+                />
               ) : watch('documentType') === 'CPF' ? (
-                <InputMaskCPF id="document" name="document" />
+                <InputMaskCPF
+                  id="document"
+                  name="document"
+                  {...register('document', {
+                    required: 'Esse campo é obrigatório',
+                  })}
+                  onChange={saveDocument}
+                />
               ) : watch('documentType') === 'CNPJ' ? (
-                <InputMaskCNPJ id="document" name="document" />
+                <InputMaskCNPJ
+                  id="document"
+                  name="document"
+                  {...register('document', {
+                    required: 'Esse campo é obrigatório',
+                  })}
+                  onChange={saveDocument}
+                />
               ) : (
                 <Input
+                  {...register('document', {
+                    required: 'Esse campo é obrigatório',
+                  })}
                   id="document"
                   name="document"
                   placeholder="Digite seu Documento"
-                  onChange={(event) => {
-                    setValue('document', event.target.value)
-                  }}
+                  onChange={saveDocument}
                 />
+              )}
+              {errors.document && (
+                <span className="-mt-3 mb-2 text-xs text-red-500">
+                  Esse campo é obrigatório
+                </span>
               )}
             </div>
           </div>
@@ -111,9 +160,12 @@ export function ModalClient({ handleCloseModal, openModal }: ModalClientProps) {
             <div className="flex flex-col">
               <Label title="UF:" />
               <Select
-                {...register('UF', { required: 'Esse Campo é Obrigatório' })}
-                value={watch('UF')}
-                onChange={(event) => setValue('UF', event.target.value)}
+                {...register('uf', { required: 'Esse Campo é Obrigatório' })}
+                value={watch('uf')}
+                onChange={(event) => {
+                  setValue('uf', event.target.value)
+                  getCity(event.target.value)
+                }}
               >
                 {ufList.map((data) => {
                   return (
@@ -123,17 +175,22 @@ export function ModalClient({ handleCloseModal, openModal }: ModalClientProps) {
                   )
                 })}
               </Select>
+              {errors.uf && (
+                <span className="-mt-3 mb-2 text-xs text-red-500">
+                  Esse campo é obrigatório
+                </span>
+              )}
             </div>
             <div className="flex flex-col">
               <Label title="Cidade:" />
               <Select
-                {...register('cityState', {
+                {...register('city', {
                   required: 'Esse Campo é Obrigatório',
                 })}
-                value={watch('cityState')}
-                onChange={(event) => setValue('cityState', event.target.value)}
+                value={watch('city')}
+                onChange={(event) => setValue('city', event.target.value)}
               >
-                {cityStateList.map((data) => {
+                {cityList.map((data) => {
                   return (
                     <MenuItem key={data.id} value={data.nome}>
                       {data.nome}
@@ -141,12 +198,17 @@ export function ModalClient({ handleCloseModal, openModal }: ModalClientProps) {
                   )
                 })}
               </Select>
+              {errors.city && (
+                <span className="-mt-3 mb-2 text-xs text-red-500">
+                  Esse campo é obrigatório
+                </span>
+              )}
             </div>
             <div className="flex flex-col">
-              <Label title="Bairro:" htmlFor="cityState" />
+              <Label title="Bairro:" htmlFor="city" />
               <Input
                 placeholder="Digite seu Bairro"
-                id="cityState"
+                id="city"
                 {...register('neighborhood', {
                   required: 'Esse campo é obrigatório',
                 })}
@@ -154,6 +216,11 @@ export function ModalClient({ handleCloseModal, openModal }: ModalClientProps) {
                   setValue('neighborhood', event.target.value)
                 }}
               />
+              {errors.neighborhood && (
+                <span className="-mt-3 mb-2 text-xs text-red-500">
+                  Esse campo é obrigatório
+                </span>
+              )}
             </div>
           </div>
           <div className="flex  w-full gap-4">
@@ -169,6 +236,11 @@ export function ModalClient({ handleCloseModal, openModal }: ModalClientProps) {
                   setValue('address', event.target.value)
                 }}
               />
+              {errors.address && (
+                <span className="-mt-3 mb-2 text-xs text-red-500">
+                  Esse campo é obrigatório
+                </span>
+              )}
             </div>
             <div className="flex w-1/3 flex-col">
               <Label title="Número:" htmlFor="number" />
@@ -182,11 +254,16 @@ export function ModalClient({ handleCloseModal, openModal }: ModalClientProps) {
                   setValue('number', event.target.value)
                 }}
               />
+              {errors.number && (
+                <span className="-mt-3 mb-2 text-xs text-red-500">
+                  Esse campo é obrigatório
+                </span>
+              )}
             </div>
           </div>
           <div className="mt-8 flex w-full justify-center">
             <Button
-              className="w-1/3"
+              className="xs:w-full lg:w-1/3"
               title="Enviar"
               type="submit"
               icon={<PaperPlaneRight />}

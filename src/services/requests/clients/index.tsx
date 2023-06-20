@@ -1,6 +1,6 @@
 import axios from 'axios'
 import {
-  FetchCityStateInterface,
+  FetchCityInterface,
   FetchClientsInterface,
   FetchUfListInterface,
 } from './interface'
@@ -17,16 +17,13 @@ export const fetchUF = ({ setUfList }: FetchUfListInterface) => {
     .catch(() => <Alert severity="error">Algo deu Errado!</Alert>)
 }
 
-export const fetchCityState = ({
-  ufOption,
-  setCityStateList,
-}: FetchCityStateInterface) => {
+export const fetchCity = ({ ufOption, setCityList }: FetchCityInterface) => {
   axios
     .get(
       `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${ufOption}/municipios?orderBy=nome`,
     )
     .then((response) => {
-      setCityStateList(response.data)
+      setCityList(response.data)
     })
     .catch(() => <Alert severity="error">Algo deu Errado!</Alert>)
 }

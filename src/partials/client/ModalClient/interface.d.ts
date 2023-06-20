@@ -3,7 +3,7 @@ export interface UfListProps {
   sigla: string
 }
 
-export interface CityStateListProps {
+export interface CityListProps {
   nome: string
   id: number
 }

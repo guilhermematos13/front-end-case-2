@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react'
 import {
-  CityStateListProps,
+  CityListProps,
   UfListProps,
 } from '../../../partials/client/ModalClient/interface'
 
@@ -8,9 +8,9 @@ export interface FetchUfListInterface {
   setUfList: Dispatch<SetStateAction<UfListProps[]>>
 }
 
-export interface FetchCityStateInterface {
+export interface FetchCityInterface {
   ufOption: string
-  setCityStateList: Dispatch<SetStateAction<CityStateListProps[]>>
+  setCityList: Dispatch<SetStateAction<CityListProps[]>>
 }
 
 export interface ClientInterface {
