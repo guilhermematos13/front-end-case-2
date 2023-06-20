@@ -91,7 +91,7 @@ export default function Header() {
       </Drawer>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static" className="bg-blue-primary">
-          <Toolbar className="flex justify-between px-14">
+          <Toolbar className="flex justify-between xs:px-4 md:px-10 lg:px-14">
             <div>
               <IconButton
                 onClick={handleSideMenuChange}
