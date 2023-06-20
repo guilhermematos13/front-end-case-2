@@ -60,8 +60,8 @@ export function ModalClient({ handleCloseModal, openModal }: ModalClientProps) {
 
   return (
     <Modal closeModal={handleCloseModal} openModal={openModal}>
-      <div className=" flex items-start justify-between">
-        <Typography className="text-2xl font-bold text-blue-primary">
+      <div className="flex items-start justify-between">
+        <Typography className="text-2xl font-bold text-blue-primary xs:text-sm">
           Criar novo Cliente
         </Typography>
         <button
