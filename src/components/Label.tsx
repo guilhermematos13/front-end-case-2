@@ -1,6 +1,6 @@
 interface LabelProps {
   title: string
-  htmlFor: string
+  htmlFor?: string
 }
 
 export function Label({ title, htmlFor }: LabelProps) {
