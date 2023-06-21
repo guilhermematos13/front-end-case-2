@@ -1,39 +1,35 @@
 'use client'
-import {
-  DotsThreeOutlineVertical,
-  PencilLine,
-  Trash,
-  User,
-} from '@phosphor-icons/react'
+import { PencilLine, Trash, User } from '@phosphor-icons/react'
 import { Button } from '../../components/Button'
 import React, { useEffect, useState } from 'react'
 import { ModalClient } from '../../partials/client/ModalClient'
 import { Table } from '../../components/Table'
 import { TableHeader } from '../../components/TableHeader'
 import { TableColumn } from '../../components/TableColumn'
-import { Popover } from '@mui/material'
+
 import { TableClientsData } from '../../data/TableClientsData'
 import { fetchClients } from '../../services/requests/clients'
 import { ClientInterface } from '../../services/requests/clients/interface'
+import { api } from '../../services/api'
+import { toast } from 'react-hot-toast'
 
 export default function ClientsPage() {
   const [openModal, setOpenModal] = useState(false)
-  const [openPopover, setOpenPopover] = useState<HTMLButtonElement | null>(null)
   const [clientList, setClientList] = useState<ClientInterface[]>([])
 
   function handleChangeModal() {
     setOpenModal((prev) => !prev)
   }
 
-  function handleClickOpenPopover(event: React.MouseEvent<HTMLButtonElement>) {
-    setOpenPopover(event.currentTarget)
+  function handleDeleteClient(id: number) {
+    api
+      .delete(`/cliente/${id}`, { data: { id } })
+      .then(() => {
+        fetchClients({ setClientList })
+        toast.success('Cliente deletado com sucesso')
+      })
+      .catch(() => toast.error('Algo deu errado'))
   }
-
-  function handleClickClosePopover() {
-    setOpenPopover(null)
-  }
-
-  const open = Boolean(openPopover)
 
   useEffect(() => {
     fetchClients({ setClientList })
@@ -83,35 +79,16 @@ export default function ClientsPage() {
               <TableColumn title={client.bairro} />
               <TableColumn
                 title={
-                  <div>
-                    <button
-                      className="w-full pl-3"
-                      onClick={handleClickOpenPopover}
-                    >
-                      <DotsThreeOutlineVertical
-                        size={20}
-                        className="hover:text-gray-600"
-                      />
+                  <div className="flex gap-2">
+                    <button className="rounded-md border border-blue-primary p-2 text-blue-primary hover:border-blue-950 hover:text-blue-900">
+                      <PencilLine size={20} />
                     </button>
-                    <Popover
-                      open={open}
-                      anchorEl={openPopover}
-                      onClose={handleClickClosePopover}
-                      anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'left',
-                      }}
+                    <button
+                      onClick={() => handleDeleteClient(client.id)}
+                      className="rounded-md border border-blue-primary p-2 text-blue-primary hover:border-blue-950 hover:text-blue-900"
                     >
-                      <div className="flex flex-col p-3">
-                        <button className="mb-2 flex items-center gap-4 rounded-md p-1 font-bold text-blue-primary hover:bg-slate-400/60">
-                          <Trash size={20} weight="bold" /> Apagar
-                        </button>
-                        <div className="w-full border border-gray-400/50 "></div>
-                        <button className="mt-2 flex items-center gap-4 rounded-md p-1 font-bold text-blue-primary hover:bg-slate-400/60">
-                          <PencilLine size={20} weight="bold" /> Editar
-                        </button>
-                      </div>
-                    </Popover>
+                      <Trash size={20} />
+                    </button>
                   </div>
                 }
               />
