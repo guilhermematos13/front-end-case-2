@@ -22,3 +22,13 @@ body {
 ::-webkit-scrollbar-thumb {
   background: #64748b;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}

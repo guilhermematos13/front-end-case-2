@@ -5,6 +5,7 @@ import {
   FetchUfListInterface,
 } from './interface'
 import { toast } from 'react-hot-toast'
+import { api } from '../../api'
 
 export const fetchUF = ({ setUfList }: FetchUfListInterface) => {
   axios
@@ -33,7 +34,7 @@ export const fetchCity = ({ ufOption, setCityList }: FetchCityInterface) => {
 }
 
 export const fetchClients = ({ setClientList }: FetchClientsInterface) => {
-  axios
+  api
     .get('https://api-deslocamento.herokuapp.com/api/v1/cliente')
     .then((response) => {
       setClientList(response.data)

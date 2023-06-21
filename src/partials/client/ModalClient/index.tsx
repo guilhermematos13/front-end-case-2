@@ -93,7 +93,7 @@ export function ModalClient({
         <div className="flex w-full flex-col">
           <Label title="Nome:" htmlFor="name" />
           <Input
-            placeholder="Digite seu nome"
+            placeholder="Digite o nome do Cliente"
             id="name"
             {...register('name', { required: 'Esse campo é obrigatório' })}
             onChange={(event) => {
@@ -167,7 +167,7 @@ export function ModalClient({
                   })}
                   id="document"
                   name="document"
-                  placeholder="Digite seu Documento"
+                  placeholder="Digite Documento do Cliente"
                   onChange={saveDocument}
                 />
               )}
@@ -229,7 +229,7 @@ export function ModalClient({
             <div className="flex flex-col">
               <Label title="Bairro:" htmlFor="city" />
               <Input
-                placeholder="Digite seu Bairro"
+                placeholder="Digite o Bairro do Cliente"
                 id="city"
                 {...register('neighborhood', {
                   required: 'Esse campo é obrigatório',
