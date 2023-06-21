@@ -24,6 +24,17 @@ export interface ClientInterface {
   uf: 'string'
 }
 
+export interface ClientFormInterface {
+  document: string
+  uf: string
+  name: string
+  documentType: string
+  city: string
+  neighborhood: string
+  address: string
+  number: string
+}
+
 export interface FetchClientsInterface {
   setClientList: Dispatch<SetStateAction<ClientInterface[]>>
 }

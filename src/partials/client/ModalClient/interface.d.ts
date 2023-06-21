@@ -11,4 +11,5 @@ export interface CityListProps {
 export interface ModalClientProps {
   handleCloseModal: () => void
   openModal: boolean
+  fetchClients: () => void
 }

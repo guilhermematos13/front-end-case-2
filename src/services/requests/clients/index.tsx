@@ -4,7 +4,7 @@ import {
   FetchClientsInterface,
   FetchUfListInterface,
 } from './interface'
-import { Alert } from '@mui/material'
+import { toast } from 'react-hot-toast'
 
 export const fetchUF = ({ setUfList }: FetchUfListInterface) => {
   axios
@@ -14,7 +14,9 @@ export const fetchUF = ({ setUfList }: FetchUfListInterface) => {
     .then((response) => {
       setUfList(response.data)
     })
-    .catch(() => <Alert severity="error">Algo deu Errado!</Alert>)
+    .catch(() => {
+      toast.error('Algo deu errado no carregamento dos estados')
+    })
 }
 
 export const fetchCity = ({ ufOption, setCityList }: FetchCityInterface) => {
@@ -25,7 +27,9 @@ export const fetchCity = ({ ufOption, setCityList }: FetchCityInterface) => {
     .then((response) => {
       setCityList(response.data)
     })
-    .catch(() => <Alert severity="error">Algo deu Errado!</Alert>)
+    .catch(() => {
+      toast.error('Algo deu errado no carregamento das cidades')
+    })
 }
 
 export const fetchClients = ({ setClientList }: FetchClientsInterface) => {
@@ -34,5 +38,7 @@ export const fetchClients = ({ setClientList }: FetchClientsInterface) => {
     .then((response) => {
       setClientList(response.data)
     })
-    .catch(() => <Alert severity="error">Algo deu Errado!</Alert>)
+    .catch(() => {
+      toast.error('Algo deu errado no carregamento dos clientes')
+    })
 }

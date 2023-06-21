@@ -13,8 +13,15 @@ import { PaperPlaneRight, X } from '@phosphor-icons/react'
 import { InputMaskCNPJ } from '../../../components/InputMaskCNPJ'
 import { fetchCity, fetchUF } from '../../../services/requests/clients'
 import { useForm } from 'react-hook-form'
+import { api } from '../../../services/api'
+import { ClientFormInterface } from '../../../services/requests/clients/interface'
+import { toast } from 'react-hot-toast'
 
-export function ModalClient({ handleCloseModal, openModal }: ModalClientProps) {
+export function ModalClient({
+  handleCloseModal,
+  openModal,
+  fetchClients,
+}: ModalClientProps) {
   const [ufList, setUfList] = useState<UfListProps[]>([])
   const [cityList, setCityList] = useState<CityListProps[]>([])
 
@@ -37,8 +44,23 @@ export function ModalClient({ handleCloseModal, openModal }: ModalClientProps) {
     },
   })
 
-  const handleSubmitData = (data: any) => {
-    console.log(data)
+  const handleSubmitData = (data: ClientFormInterface) => {
+    api
+      .post('/cliente', {
+        numeroDocumento: data.document,
+        tipoDocumento: data.documentType,
+        nome: data.name,
+        logradouro: data.address,
+        numero: data.number,
+        bairro: data.neighborhood,
+        cidade: data.city,
+        uf: data.uf,
+      })
+      .then(() => {
+        toast.success('Novo cliente criado!')
+        fetchClients()
+        handleCloseModal()
+      })
   }
 
   useEffect(() => {

@@ -2,6 +2,7 @@ import { ReactNode } from 'react'
 import Header from '../components/Header'
 import '../styles/globals.css'
 import { Roboto } from 'next/font/google'
+import { Toaster } from 'react-hot-toast'
 
 const roboto = Roboto({ weight: ['400', '500', '700'], subsets: ['latin'] })
 
@@ -15,6 +16,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" suppressHydrationWarning={true}>
       <body className={roboto.className}>
         <Header />
+        <Toaster position="top-right" reverseOrder={false} />
         {children}
       </body>
     </html>

@@ -34,7 +34,6 @@ export default function ClientsPage() {
   }
 
   const open = Boolean(openPopover)
-  const id = open ? 'simples-popover' : undefined
 
   useEffect(() => {
     fetchClients({ setClientList })
@@ -55,7 +54,11 @@ export default function ClientsPage() {
         </div>
       </div>
       <div className="w-full border border-blue-primary/50" />
-      <ModalClient handleCloseModal={handleChangeModal} openModal={openModal} />
+      <ModalClient
+        fetchClients={() => fetchClients({ setClientList })}
+        handleCloseModal={handleChangeModal}
+        openModal={openModal}
+      />
       <div className="w-full">
         <Table
           tHeadChildren={TableClientsData.map((data, index) => (
@@ -85,10 +88,12 @@ export default function ClientsPage() {
                       className="w-full pl-3"
                       onClick={handleClickOpenPopover}
                     >
-                      <DotsThreeOutlineVertical size={20} />
+                      <DotsThreeOutlineVertical
+                        size={20}
+                        className="hover:text-gray-600"
+                      />
                     </button>
                     <Popover
-                      id={id}
                       open={open}
                       anchorEl={openPopover}
                       onClose={handleClickClosePopover}
