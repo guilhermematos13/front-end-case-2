@@ -14,6 +14,7 @@ export interface FetchCityInterface {
 }
 
 export interface ClientInterface {
+  id: number
   numeroDocumento: 'string'
   tipoDocumento: 'string'
   nome: 'string'
