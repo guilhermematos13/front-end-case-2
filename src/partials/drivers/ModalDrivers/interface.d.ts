@@ -6,7 +6,7 @@ export interface ModalDriverProps {
 
 export interface DriverFormInterface {
   name: string
-  driverDocument: string
+  driverDocument: string[]
   documentNumber: string
   licenseExpirationDate: string
 }

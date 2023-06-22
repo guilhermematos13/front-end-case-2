@@ -2,18 +2,14 @@ import { Input } from '../../../components/Input'
 import { Label } from '../../../components/Label'
 import { Modal } from '../../../components/Modal'
 import { DriverFormInterface, ModalDriverProps } from './interface'
-import { MenuItem, Typography } from '@mui/material'
+import { MenuItem, SelectChangeEvent, Typography } from '@mui/material'
 import { PaperPlaneRight, X } from '@phosphor-icons/react'
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo'
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
-import { DateField } from '@mui/x-date-pickers/DateField'
-import { ptBR } from 'date-fns/locale'
 
-import { Controller, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { Select } from '../../../components/Select'
 import { SelectDriverDocumentData } from '../../../data/SelectDriverDocumentData'
 import { Button } from '../../../components/Button'
+import { InputDate } from '../../../components/InputDate'
 
 export function ModalDrivers({
   handleCloseModal,
@@ -29,15 +25,25 @@ export function ModalDrivers({
     formState: { errors },
   } = useForm({
     defaultValues: {
-      driverDocument: '',
+      driverDocument: [],
       name: '',
       documentNumber: '',
-      licenseExpirationDate: '',
+      licenseExpirationDate: new Date(),
     },
   })
 
   const handleSubmitData = (data: DriverFormInterface) => {
     console.log(data)
+  }
+
+  const handleChange = (event: SelectChangeEvent) => {
+    const {
+      target: { value },
+    } = event
+    setValue(
+      'driverDocument',
+      typeof value === 'string' ? value.split(',') : value,
+    )
   }
 
   return (
@@ -75,14 +81,14 @@ export function ModalDrivers({
           </div>
           <div className="flex flex-col">
             <Label title="Categoria da Habilitação" htmlFor="" />
+            {watch('driverDocument')}
             <Select
+              isMultiple
               {...register('driverDocument', {
                 required: 'Esse Campo é Obrigatório',
               })}
               value={watch('driverDocument')}
-              onChange={(event) =>
-                setValue('driverDocument', event.target.value)
-              }
+              onChange={handleChange}
             >
               {SelectDriverDocumentData.map((data) => {
                 return (
@@ -119,32 +125,17 @@ export function ModalDrivers({
             </div>
 
             <div className="flex flex-col">
-              <Label title="Vencimento da Habilitação" htmlFor="date" />
-              <LocalizationProvider
-                dateAdapter={AdapterDateFns}
-                adapterLocale={ptBR}
-              >
-                <Controller
-                  name="licenseExpirationDate"
+              <div className="flex flex-col gap-2">
+                <Label title="Vencimento da Habilitação" htmlFor="date" />
+                <InputDate
+                  value={watch('licenseExpirationDate')}
                   control={control}
-                  render={({ field }) => (
-                    <DemoContainer
-                      {...field}
-                      components={['DateField', 'DateField']}
-                    >
-                      <DateField
-                        {...register('licenseExpirationDate', {
-                          required: true,
-                        })}
-                        id="date"
-                        className="-mt-1 mb-4 w-full rounded-lg border-transparent bg-slate-100 text-gray-950 outline-none placeholder:text-gray-600 hover:border-gray-950 focus:border focus:border-blue-primary"
-                      />
-                    </DemoContainer>
-                  )}
+                  name="licenseExpirationDate"
+                  label="Data"
                 />
-              </LocalizationProvider>
+              </div>
               {errors.licenseExpirationDate && (
-                <span className="-mt-3 mb-2 text-xs text-red-500">
+                <span className="-mt-2 mb-2 text-xs text-red-500">
                   Esse campo é obrigatório
                 </span>
               )}
