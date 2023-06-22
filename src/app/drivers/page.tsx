@@ -10,6 +10,8 @@ import { fetchDrivers } from '../../services/requests/drivers'
 import { DriverInterface } from '../../services/requests/drivers/interface'
 import { TableDriversData } from '../../data/TableDriversData'
 import { ModalDrivers } from '../../partials/drivers/ModalDrivers'
+import { toast } from 'react-hot-toast'
+import { api } from '../../services/api'
 
 export default function DriversPage() {
   const [openModal, setOpenModal] = useState(false)
@@ -17,6 +19,16 @@ export default function DriversPage() {
 
   function handleChangeModal() {
     setOpenModal((prev) => !prev)
+  }
+
+  function handleDeleteClient(id: number) {
+    api
+      .delete(`/condutor/${id}`, { data: { id } })
+      .then(() => {
+        fetchDrivers({ setDriverList })
+        toast.success('Cliente deletado com sucesso')
+      })
+      .catch(() => toast.error('Algo deu errado'))
   }
 
   useEffect(() => {
@@ -80,7 +92,10 @@ export default function DriversPage() {
                     <button className="rounded-md border border-blue-primary p-2 text-blue-primary hover:border-blue-950 hover:text-blue-900">
                       <PencilLine size={20} />
                     </button>
-                    <button className="rounded-md border border-blue-primary p-2 text-blue-primary hover:border-blue-950 hover:text-blue-900">
+                    <button
+                      onClick={() => handleDeleteClient(driver.id)}
+                      className="rounded-md border border-blue-primary p-2 text-blue-primary hover:border-blue-950 hover:text-blue-900"
+                    >
                       <Trash size={20} />
                     </button>
                   </div>

@@ -30,6 +30,7 @@ export function ModalClient({
     handleSubmit,
     setValue,
     watch,
+    reset,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -58,6 +59,7 @@ export function ModalClient({
       })
       .then(() => {
         toast.success('Novo cliente criado!')
+        reset()
         fetchClients()
         handleCloseModal()
       })

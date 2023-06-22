@@ -10,6 +10,8 @@ import { Select } from '../../../components/Select'
 import { SelectDriverDocumentData } from '../../../data/SelectDriverDocumentData'
 import { Button } from '../../../components/Button'
 import { InputDate } from '../../../components/InputDate'
+import { api } from '../../../services/api'
+import { toast } from 'react-hot-toast'
 
 export function ModalDrivers({
   handleCloseModal,
@@ -22,6 +24,7 @@ export function ModalDrivers({
     setValue,
     watch,
     control,
+    reset,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -33,7 +36,22 @@ export function ModalDrivers({
   })
 
   const handleSubmitData = (data: DriverFormInterface) => {
-    console.log(data)
+    api
+      .post('/condutor', {
+        nome: data.name,
+        numeroHabilitacao: data.documentNumber,
+        categoriaHabilitacao: data.driverDocument.toString(),
+        vencimentoHabilitacao: data.licenseExpirationDate,
+      })
+      .then(() => {
+        handleCloseModal()
+        fetchDriver()
+        reset()
+        toast.success('Condutor criado com sucesso!')
+      })
+      .catch(() => {
+        toast.error('Algo deu errado!')
+      })
   }
 
   const handleChange = (event: SelectChangeEvent) => {
