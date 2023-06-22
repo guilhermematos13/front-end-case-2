@@ -99,7 +99,21 @@ export function ModalDrivers({
           </div>
           <div className="flex flex-col">
             <Label title="Categoria da Habilitação" htmlFor="" />
-            {watch('driverDocument')}
+            {watch('driverDocument').length > 0 && (
+              <div className="mb-1 mt-2 flex items-center gap-1 rounded-md border border-blue-primary p-2">
+                <strong>Categorias Selecionadas: </strong>
+                <div className="flex gap-1">
+                  {watch('driverDocument').map((category) => (
+                    <span
+                      key={category}
+                      className="rounded-md bg-blue-primary px-2 py-1 text-slate-100"
+                    >
+                      {category}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
             <Select
               isMultiple
               {...register('driverDocument', {

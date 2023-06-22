@@ -1,5 +1,5 @@
 'use client'
-import { PencilLine, Trash, User } from '@phosphor-icons/react'
+import { PencilLine, SteeringWheel, Trash } from '@phosphor-icons/react'
 import { Button } from '../../components/Button'
 import React, { useEffect, useState } from 'react'
 import { Table } from '../../components/Table'
@@ -43,7 +43,7 @@ export default function DriversPage() {
         </h1>
         <div>
           <Button
-            icon={<User size={20} weight="fill" />}
+            icon={<SteeringWheel size={20} weight="fill" />}
             title="Criar um novo Condutor"
             onClick={handleChangeModal}
           />
