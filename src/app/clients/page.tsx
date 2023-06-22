@@ -58,7 +58,11 @@ export default function ClientsPage() {
       <div className="w-full">
         <Table
           tHeadChildren={TableClientsData.map((data, index) => (
-            <TableHeader key={index} title={data.label} />
+            <TableHeader
+              key={index}
+              title={data.label}
+              className="text-center"
+            />
           ))}
           tBodyChildren={clientList.map((client, index) => (
             <tr
@@ -69,17 +73,23 @@ export default function ClientsPage() {
                   : ''
               }
             >
-              <TableColumn title={client.tipoDocumento} />
-              <TableColumn title={client.numeroDocumento} />
-              <TableColumn title={client.nome} />
-              <TableColumn title={client.logradouro} />
-              <TableColumn title={client.numero} />
-              <TableColumn title={client.uf} />
-              <TableColumn title={client.cidade} />
-              <TableColumn title={client.bairro} />
+              <TableColumn
+                className="text-center"
+                title={client.tipoDocumento}
+              />
+              <TableColumn
+                className="text-center"
+                title={client.numeroDocumento}
+              />
+              <TableColumn className="text-center" title={client.nome} />
+              <TableColumn className="text-center" title={client.logradouro} />
+              <TableColumn className="text-center" title={client.numero} />
+              <TableColumn className="text-center" title={client.uf} />
+              <TableColumn className="text-center" title={client.cidade} />
+              <TableColumn className="text-center" title={client.bairro} />
               <TableColumn
                 title={
-                  <div className="flex gap-2">
+                  <div className="flex w-full items-center justify-center gap-2">
                     <button className="rounded-md border border-blue-primary p-2 text-blue-primary hover:border-blue-950 hover:text-blue-900">
                       <PencilLine size={20} />
                     </button>
