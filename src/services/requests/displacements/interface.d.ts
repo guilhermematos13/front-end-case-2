@@ -14,6 +14,20 @@ export interface displacementInterface {
   idCliente: number
 }
 
+export interface displacementFormInterface {
+  id: number
+  currentKm: number
+  finalKm: number
+  startDisplacement: Date
+  endDisplacement: Date
+  checkList: string
+  reason: string
+  observation: string
+  idDriver: number
+  idVehicle: number
+  idClient: number
+}
+
 export interface fetchDisplacementInterface {
   setDisplacementsList: Dispatch<SetStateAction<displacementInterface[]>>
 }

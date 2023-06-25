@@ -68,7 +68,7 @@ export function ModalDrivers({
     <Modal closeModal={handleCloseModal} openModal={openModal}>
       <div className="flex items-start justify-between">
         <Typography className="font-bold text-blue-primary xs:text-xl md:text-2xl">
-          Criar novo Cliente
+          Criar novo Condutor
         </Typography>
         <button
           onClick={handleCloseModal}
@@ -92,7 +92,7 @@ export function ModalDrivers({
               }}
             />
             {errors.name && (
-              <span className="-mt-3 mb-2 text-xs text-red-500">
+              <span className="mb-2 mt-1 text-xs text-red-500">
                 Esse campo é obrigatório
               </span>
             )}
@@ -131,12 +131,12 @@ export function ModalDrivers({
               })}
             </Select>
             {errors.driverDocument && (
-              <span className="-mt-3 mb-2 text-xs text-red-500">
+              <span className="mb-2 mt-1 text-xs text-red-500">
                 Esse campo é obrigatório
               </span>
             )}
           </div>
-          <div className="w-full items-center justify-center gap-4 xs:flex xs:flex-col lg:grid lg:grid-cols-2">
+          <div className="w-full items-start gap-4 xs:flex xs:flex-col lg:grid lg:grid-cols-2">
             <div className="flex w-full flex-col">
               <Label title="N° da Habilitação" htmlFor="documentNumber" />
               <Input
@@ -150,14 +150,14 @@ export function ModalDrivers({
                 placeholder="Digite o Número da Habilitação"
               />
               {errors.documentNumber && (
-                <span className="-mt-3 text-xs text-red-500">
+                <span className="mt-1 text-xs text-red-500">
                   Esse campo é obrigatório
                 </span>
               )}
             </div>
 
             <div className="flex flex-col">
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col">
                 <Label title="Vencimento da Habilitação" htmlFor="date" />
                 <InputDate
                   value={watch('licenseExpirationDate')}
@@ -167,7 +167,7 @@ export function ModalDrivers({
                 />
               </div>
               {errors.licenseExpirationDate && (
-                <span className="-mt-2 mb-2 text-xs text-red-500">
+                <span className="mb-2 mt-1 text-xs text-red-500">
                   Esse campo é obrigatório
                 </span>
               )}

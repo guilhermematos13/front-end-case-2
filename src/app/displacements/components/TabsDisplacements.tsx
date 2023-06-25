@@ -1,22 +1,29 @@
 import { Tabs, Tab } from '@mui/material'
-import { useEffect, useState } from 'react'
-import { fetchDisplacements } from '../services/requests/displacements'
-import { displacementInterface } from '../services/requests/displacements/interface'
-import { Table } from './Table'
-import { TableHeader } from './TableHeader'
-import { TableColumn } from './TableColumn'
+import { Dispatch, SetStateAction, useState } from 'react'
+import { fetchDisplacements } from '../../../services/requests/displacements'
+import { displacementInterface } from '../../../services/requests/displacements/interface'
+import { Table } from '../../../components/Table'
+import { TableHeader } from '../../../components/TableHeader'
+import { TableColumn } from '../../../components/TableColumn'
 import { Pause, Trash } from '@phosphor-icons/react'
 import { format } from 'date-fns'
-import { api } from '../services/api'
+import { api } from '../../../services/api'
 import { toast } from 'react-hot-toast'
-import { TableInDisplacementsData } from '../data/TableInDisplacementsData copy'
-import { TableFinishDisplacementsData } from '../data/TableFinishedDisplacementsData'
+import { TableInDisplacementsData } from '../../../data/TableInDisplacementsData copy'
+import { TableFinishDisplacementsData } from '../../../data/TableFinishedDisplacementsData'
 
-export function TabsDisplacements() {
+interface TabsDisplacementsInterface {
+  handleChangeModal: () => void
+  displacementsList: displacementInterface[]
+  setDisplacementsList: Dispatch<SetStateAction<displacementInterface[]>>
+}
+
+export function TabsDisplacements({
+  handleChangeModal,
+  displacementsList,
+  setDisplacementsList,
+}: TabsDisplacementsInterface) {
   const [selectedTab, setSelectedTab] = useState(0)
-  const [displacementsList, setDisplacementsList] = useState<
-    displacementInterface[]
-  >([])
 
   const handleChange = (event, newValue) => {
     setSelectedTab(newValue)
@@ -31,10 +38,6 @@ export function TabsDisplacements() {
       })
       .catch(() => toast.error('Algo deu errado'))
   }
-
-  useEffect(() => {
-    fetchDisplacements({ setDisplacementsList })
-  }, [])
 
   return (
     <div>

@@ -24,7 +24,7 @@ export const InputDate = forwardRef<HTMLDivElement, InputDateProps>(
               disablePast
               {...field}
               ref={ref}
-              className="-mt-1 mb-4 w-full rounded-lg border-transparent bg-slate-100 text-gray-950 outline-none placeholder:text-gray-600 hover:border-gray-950 focus:border focus:border-blue-primary"
+              className="mb-2 mt-1 w-full rounded-lg border-transparent bg-slate-100 text-gray-950 outline-none placeholder:text-gray-600 hover:border-gray-950 focus:border focus:border-blue-primary"
             />
           )}
         />

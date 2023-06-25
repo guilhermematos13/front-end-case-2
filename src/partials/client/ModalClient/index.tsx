@@ -103,7 +103,7 @@ export function ModalClient({
             }}
           />
           {errors.name && (
-            <span className="-mt-3 mb-2 text-xs text-red-500">
+            <span className="mb-2 mt-1 text-xs text-red-500">
               Esse campo é obrigatório
             </span>
           )}
@@ -128,7 +128,7 @@ export function ModalClient({
                 })}
               </Select>
               {errors.documentType && (
-                <span className="-mt-3 mb-2 text-xs text-red-500">
+                <span className="mb-2 mt-1 text-xs text-red-500">
                   Esse campo é obrigatório
                 </span>
               )}
@@ -174,7 +174,7 @@ export function ModalClient({
                 />
               )}
               {errors.document && (
-                <span className="-mt-3 mb-2 text-xs text-red-500">
+                <span className="mb-2 mt-1 text-xs text-red-500">
                   Esse campo é obrigatório
                 </span>
               )}
@@ -200,7 +200,7 @@ export function ModalClient({
                 })}
               </Select>
               {errors.uf && (
-                <span className="-mt-3 mb-2 text-xs text-red-500">
+                <span className="mb-2 mt-1 text-xs text-red-500">
                   Esse campo é obrigatório
                 </span>
               )}
@@ -223,7 +223,7 @@ export function ModalClient({
                 })}
               </Select>
               {errors.city && (
-                <span className="-mt-3 mb-2 text-xs text-red-500">
+                <span className="mb-2 mt-1 text-xs text-red-500">
                   Esse campo é obrigatório
                 </span>
               )}
@@ -241,7 +241,7 @@ export function ModalClient({
                 }}
               />
               {errors.neighborhood && (
-                <span className="-mt-3 mb-2 text-xs text-red-500">
+                <span className="mb-2 mt-1 text-xs text-red-500">
                   Esse campo é obrigatório
                 </span>
               )}
@@ -261,7 +261,7 @@ export function ModalClient({
                 }}
               />
               {errors.address && (
-                <span className="-mt-3 mb-2 text-xs text-red-500">
+                <span className="mb-2 mt-1 text-xs text-red-500">
                   Esse campo é obrigatório
                 </span>
               )}
@@ -279,7 +279,7 @@ export function ModalClient({
                 }}
               />
               {errors.number && (
-                <span className="-mt-3 mb-2 text-xs text-red-500">
+                <span className="mb-2 mt-1 text-xs text-red-500">
                   Esse campo é obrigatório
                 </span>
               )}

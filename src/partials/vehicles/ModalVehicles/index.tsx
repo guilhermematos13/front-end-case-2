@@ -78,7 +78,7 @@ export function ModalVehicles({
               }}
             />
             {errors.licensePlate && (
-              <span className="-mt-3 mb-2 text-xs text-red-500">
+              <span className="mb-2 mt-1 text-xs text-red-500">
                 Esse campo é obrigatório
               </span>
             )}
@@ -95,7 +95,7 @@ export function ModalVehicles({
               }}
             />
             {errors.brandModel && (
-              <span className="-mt-3 mb-2 text-xs text-red-500">
+              <span className="mb-2 mt-1 text-xs text-red-500">
                 Esse campo é obrigatório
               </span>
             )}
@@ -117,7 +117,7 @@ export function ModalVehicles({
                 placeholder="Digite o KM atual do veículo"
               />
               {errors.currentKm && (
-                <span className="-mt-3 text-xs text-red-500">
+                <span className="mt-1 text-xs text-red-500">
                   Esse campo é obrigatório
                 </span>
               )}
@@ -135,7 +135,7 @@ export function ModalVehicles({
                 />
               </div>
               {errors.year && (
-                <span className="-mt-2 mb-2 text-xs text-red-500">
+                <span className="mb-2 mt-1 text-xs text-red-500">
                   Esse campo é obrigatório
                 </span>
               )}
