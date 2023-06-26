@@ -5,7 +5,7 @@ export interface DriverInterface {
   catergoriaHabilitacao: string
   nome: string
   numeroHabilitacao: string
-  vencimentoHabilitacao: string
+  vencimentoHabilitacao: Date
 }
 
 export interface FetchDriverInterface {

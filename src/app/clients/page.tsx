@@ -44,7 +44,7 @@ export default function ClientsPage() {
         <div>
           <Button
             icon={<User size={20} weight="fill" />}
-            title="Criar um novo Cliente"
+            title="Criar um novo cliente"
             onClick={handleChangeModal}
           />
         </div>
@@ -67,11 +67,7 @@ export default function ClientsPage() {
           tBodyChildren={clientList.map((client, index) => (
             <tr
               key={index}
-              className={
-                index < clientList.length - 1
-                  ? 'border-b border-b-gray-600'
-                  : ''
-              }
+              className="border-b border-b-gray-600 last-of-type:border-0"
             >
               <TableColumn
                 className="text-center"

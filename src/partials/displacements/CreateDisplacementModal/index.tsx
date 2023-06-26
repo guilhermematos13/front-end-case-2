@@ -10,8 +10,7 @@ import { PaperPlaneRight, X } from '@phosphor-icons/react'
 import { useForm } from 'react-hook-form'
 import { api } from '../../../services/api'
 import { toast } from 'react-hot-toast'
-import { displacementFormInterface } from '../../../services/requests/displacements/interface'
-import { InputDate } from '../../../components/InputDate'
+import { createDisplacementFormInterface } from '../../../services/requests/displacements/interface'
 import { TextArea } from '../../../components/TextArea'
 import { fetchClients } from '../../../services/requests/clients'
 import { fetchDrivers } from '../../../services/requests/drivers'
@@ -19,8 +18,9 @@ import { fetchVehicles } from '../../../services/requests/vehicles'
 import { ClientInterface } from '../../../services/requests/clients/interface'
 import { DriverInterface } from '../../../services/requests/drivers/interface'
 import { VehicleInterface } from '../../../services/requests/vehicles/interface'
+import { InputDateTime } from '../../../components/InputDateTime'
 
-export function DisplacementModal({
+export function CreateDisplacementModal({
   handleCloseModal,
   openModal,
   fetchDisplacement,
@@ -40,7 +40,7 @@ export function DisplacementModal({
   } = useForm({
     defaultValues: {
       currentKm: null,
-      startDisplacement: new Date(),
+      startDisplacement: null,
       checkList: '',
       reason: '',
       observation: '',
@@ -56,13 +56,12 @@ export function DisplacementModal({
     fetchVehicles({ setVehiclesList })
   }, [])
 
-  const handleSubmitData = (data: displacementFormInterface) => {
+  const handleSubmitData = (data: createDisplacementFormInterface) => {
+    console.log(data.startDisplacement)
     api
       .post('/deslocamento/iniciardeslocamento', {
         kmInicial: data.currentKm,
-        kmFinal: data.finalKm,
         inicioDeslocamento: data.startDisplacement,
-        fimDeslocamento: data.endDisplacement,
         checkList: data.checkList,
         motivo: data.reason,
         observacao: data.observation,
@@ -109,7 +108,7 @@ export function DisplacementModal({
           </div>
           <div className=" flex w-full flex-col gap-2">
             <Label title="Inicio do Deslocamento" htmlFor="currentKm" />
-            <InputDate
+            <InputDateTime
               {...register('startDisplacement', { required: true })}
               control={control}
               value={watch('startDisplacement')}

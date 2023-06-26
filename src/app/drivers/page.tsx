@@ -12,6 +12,7 @@ import { TableDriversData } from '../../data/TableDriversData'
 import { ModalDrivers } from '../../partials/drivers/ModalDrivers'
 import { toast } from 'react-hot-toast'
 import { api } from '../../services/api'
+import { getFormatDate } from '../../utils/getFormatDate'
 
 export default function DriversPage() {
   const [openModal, setOpenModal] = useState(false)
@@ -44,7 +45,7 @@ export default function DriversPage() {
         <div>
           <Button
             icon={<SteeringWheel size={20} weight="fill" />}
-            title="Criar um novo Condutor"
+            title="Criar um novo condutor"
             onClick={handleChangeModal}
           />
         </div>
@@ -67,11 +68,7 @@ export default function DriversPage() {
           tBodyChildren={driverList.map((driver, index) => (
             <tr
               key={index}
-              className={
-                index < driverList.length - 1
-                  ? 'border-b border-b-gray-600'
-                  : ''
-              }
+              className="border-b border-b-gray-600 last-of-type:border-0"
             >
               <TableColumn title={driver.nome} className="text-center" />
               <TableColumn
@@ -83,7 +80,10 @@ export default function DriversPage() {
                 className="text-center"
               />
               <TableColumn
-                title={driver.vencimentoHabilitacao}
+                title={getFormatDate(
+                  driver.vencimentoHabilitacao,
+                  'dd/MM/yyyy',
+                )}
                 className="text-center"
               />
               <TableColumn

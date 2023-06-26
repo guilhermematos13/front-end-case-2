@@ -14,18 +14,23 @@ export interface displacementInterface {
   idCliente: number
 }
 
-export interface displacementFormInterface {
+export interface createDisplacementFormInterface {
   id: number
   currentKm: number
-  finalKm: number
   startDisplacement: Date
-  endDisplacement: Date
   checkList: string
   reason: string
   observation: string
   idDriver: number
   idVehicle: number
   idClient: number
+}
+
+export interface finishDisplacementFormInterface {
+  id: number
+  finalKm: number
+  endDisplacement: Date
+  observation: string
 }
 
 export interface fetchDisplacementInterface {

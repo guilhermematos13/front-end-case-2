@@ -6,20 +6,20 @@ import { Table } from '../../../components/Table'
 import { TableHeader } from '../../../components/TableHeader'
 import { TableColumn } from '../../../components/TableColumn'
 import { Pause, Trash } from '@phosphor-icons/react'
-import { format } from 'date-fns'
 import { api } from '../../../services/api'
 import { toast } from 'react-hot-toast'
 import { TableInDisplacementsData } from '../../../data/TableInDisplacementsData copy'
 import { TableFinishDisplacementsData } from '../../../data/TableFinishedDisplacementsData'
+import { getFormatDate } from '../../../utils/getFormatDate'
 
 interface TabsDisplacementsInterface {
-  handleChangeModal: () => void
+  handleChangeFinishModal: (setDisplacementId: number) => void
   displacementsList: displacementInterface[]
   setDisplacementsList: Dispatch<SetStateAction<displacementInterface[]>>
 }
 
 export function TabsDisplacements({
-  handleChangeModal,
+  handleChangeFinishModal,
   displacementsList,
   setDisplacementsList,
 }: TabsDisplacementsInterface) {
@@ -60,11 +60,7 @@ export function TabsDisplacements({
                 !displacement.fimDeslocamento && (
                   <tr
                     key={index}
-                    className={
-                      index < displacementsList.length - 1
-                        ? 'border-b border-b-gray-600'
-                        : ''
-                    }
+                    className="border-b border-b-gray-600 last-of-type:border-0"
                   >
                     <TableColumn
                       className="text-center"
@@ -75,10 +71,7 @@ export function TabsDisplacements({
                       className="text-center"
                       title={
                         displacement.inicioDeslocamento &&
-                        format(
-                          new Date(displacement.inicioDeslocamento),
-                          'dd/MM/yyyy',
-                        )
+                        getFormatDate(displacement.inicioDeslocamento)
                       }
                     />
 
@@ -110,7 +103,12 @@ export function TabsDisplacements({
                     <TableColumn
                       title={
                         <div className="flex w-full items-center justify-center gap-2">
-                          <button className="rounded-md border border-red-500 p-2 text-red-500 hover:border-red-800 hover:text-red-800">
+                          <button
+                            onClick={() => {
+                              handleChangeFinishModal(displacement.id)
+                            }}
+                            className="rounded-md border border-red-500 p-2 text-red-500 hover:border-red-800 hover:text-red-800"
+                          >
                             <Pause size={20} />
                           </button>
                           <button
@@ -144,11 +142,7 @@ export function TabsDisplacements({
                 displacement.fimDeslocamento && (
                   <tr
                     key={index}
-                    className={
-                      index < displacementsList.length - 1
-                        ? 'border-b border-b-gray-600'
-                        : ''
-                    }
+                    className="border-b border-b-gray-600 last-of-type:border-0"
                   >
                     <TableColumn
                       className="text-center"
@@ -164,10 +158,7 @@ export function TabsDisplacements({
                       className="text-center"
                       title={
                         displacement.inicioDeslocamento &&
-                        format(
-                          new Date(displacement.inicioDeslocamento),
-                          'dd/MM/yyyy',
-                        )
+                        getFormatDate(displacement.inicioDeslocamento)
                       }
                     />
 
@@ -175,10 +166,7 @@ export function TabsDisplacements({
                       className="text-center"
                       title={
                         displacement.fimDeslocamento &&
-                        format(
-                          new Date(displacement.fimDeslocamento),
-                          'dd/MM/yyyy',
-                        )
+                        getFormatDate(displacement.fimDeslocamento)
                       }
                     />
 

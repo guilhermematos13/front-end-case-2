@@ -66,11 +66,7 @@ export default function DriversPage() {
           tBodyChildren={vehiclesList.map((vehicle, index) => (
             <tr
               key={index}
-              className={
-                index < vehiclesList.length - 1
-                  ? 'border-b border-b-gray-600'
-                  : ''
-              }
+              className="border-b border-b-gray-600 last-of-type:border-0"
             >
               <TableColumn title={vehicle.placa} className="text-center" />
               <TableColumn
