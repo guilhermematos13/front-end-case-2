@@ -17,6 +17,7 @@ interface TabsDisplacementsInterface {
   displacementsList: displacementInterface[]
   setDisplacementsList: Dispatch<SetStateAction<displacementInterface[]>>
   isLoading: boolean
+  setIsLoading: Dispatch<SetStateAction<boolean>>
 }
 
 export function TabsDisplacements({
@@ -24,6 +25,7 @@ export function TabsDisplacements({
   displacementsList,
   setDisplacementsList,
   isLoading,
+  setIsLoading,
 }: TabsDisplacementsInterface) {
   const [selectedTab, setSelectedTab] = useState(0)
 
@@ -37,7 +39,6 @@ export function TabsDisplacements({
         ? displacement.fimDeslocamento !== null
         : displacement.fimDeslocamento === null,
     )
-    console.log(verifyList)
     return verifyList.length === 0
   }
 
@@ -45,7 +46,7 @@ export function TabsDisplacements({
     api
       .delete(`/deslocamento/${id}`, { data: { id } })
       .then(() => {
-        fetchDisplacements({ setDisplacementsList })
+        fetchDisplacements({ setDisplacementsList, setIsLoading })
         toast.success('Deslocamento deletado com sucesso')
       })
       .catch(() => toast.error('Algo deu errado'))

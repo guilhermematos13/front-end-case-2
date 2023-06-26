@@ -48,6 +48,7 @@ export default function DisplacementsPage() {
       <div className="w-full border border-blue-primary/50" />
 
       <TabsDisplacements
+        setIsLoading={setIsLoading}
         isLoading={isLoading}
         handleChangeFinishModal={handleChangeFinishModal}
         displacementsList={displacementsList}

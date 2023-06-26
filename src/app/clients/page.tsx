@@ -12,13 +12,23 @@ import { fetchClients } from '../../services/requests/clients'
 import { ClientInterface } from '../../services/requests/clients/interface'
 import { api } from '../../services/api'
 import { toast } from 'react-hot-toast'
+import { EditModalClient } from '../../partials/client/EditModalClient'
 export default function ClientsPage() {
   const [openModal, setOpenModal] = useState(false)
+  const [openEditModal, setOpenEditModal] = useState(false)
+  const [clientId, setClientId] = useState<number>()
   const [clientList, setClientList] = useState<ClientInterface[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
   function handleChangeModal() {
     setOpenModal((prev) => !prev)
+  }
+
+  function handleChangeEditModal(id?: number) {
+    if (id) {
+      setClientId(id)
+    }
+    setOpenEditModal((prev) => !prev)
   }
 
   function handleDeleteClient(id: number) {
@@ -55,6 +65,12 @@ export default function ClientsPage() {
         handleCloseModal={handleChangeModal}
         openModal={openModal}
       />
+      <EditModalClient
+        idClient={clientId}
+        fetchClients={() => fetchClients({ setClientList, setIsLoading })}
+        handleCloseModal={handleChangeEditModal}
+        openEditModal={openEditModal}
+      />
       <div className="w-full">
         <Table
           isEmpty={clientList.length === 0}
@@ -88,7 +104,12 @@ export default function ClientsPage() {
               <TableColumn
                 title={
                   <div className="flex w-full items-center justify-center gap-2">
-                    <button className="rounded-md border border-blue-primary p-2 text-blue-primary hover:border-blue-950 hover:text-blue-900">
+                    <button
+                      onClick={() => {
+                        handleChangeEditModal(client.id)
+                      }}
+                      className="rounded-md border border-blue-primary p-2 text-blue-primary hover:border-blue-950 hover:text-blue-900"
+                    >
                       <PencilLine size={20} />
                     </button>
                     <button

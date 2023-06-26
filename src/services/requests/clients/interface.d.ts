@@ -26,6 +26,7 @@ export interface ClientInterface {
 }
 
 export interface ClientFormInterface {
+  id: number
   document: string
   uf: string
   name: string

@@ -11,7 +11,7 @@ export const InputMaskCPF = forwardRef(
     return (
       <InputMask
         ref={ref}
-        className=" mb-4 mt-1 w-full rounded-lg bg-slate-100 p-4 text-gray-950 outline-none placeholder:text-gray-600 hover:border-gray-950 focus:border focus:border-blue-primary"
+        className=" mb-4 mt-1 w-full rounded-lg bg-slate-100 p-4 text-gray-950 outline-none placeholder:text-gray-600 hover:border-gray-950 focus:border focus:border-blue-primary disabled:border disabled:border-gray-400 disabled:text-gray-400 "
         {...props}
         mask="999.999.999-99"
         onChange={onChange}
