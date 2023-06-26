@@ -5,12 +5,13 @@ import React, { useEffect, useState } from 'react'
 import { Table } from '../../components/Table'
 import { TableHeader } from '../../components/TableHeader'
 import { TableColumn } from '../../components/TableColumn'
-import { toast } from 'react-hot-toast'
 import { api } from '../../services/api'
 import { VehicleInterface } from '../../services/requests/vehicles/interface'
 import { fetchVehicles } from '../../services/requests/vehicles'
 import { TableVehiclesData } from '../../data/TableVehiclesData'
 import { ModalVehicles } from '../../partials/vehicles/ModalVehicles'
+import Swal from 'sweetalert2'
+import 'sweetalert2/src/sweetalert2.scss'
 
 export default function DriversPage() {
   const [openModal, setOpenModal] = useState(false)
@@ -22,13 +23,52 @@ export default function DriversPage() {
   }
 
   function handleDeleteClient(id: number) {
-    api
-      .delete(`veiculo/${id}`, { data: { id } })
-      .then(() => {
-        fetchVehicles({ setVehiclesList, setIsLoading })
-        toast.success('Veículo deletado com sucesso')
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton:
+          'bg-green-400 ml-4 rounded-md p-4 border border-green-600 hover:bg-green-600',
+        cancelButton:
+          'bg-red-400 rounded-md p-4 border border-red-600 hover:bg-red-600',
+      },
+      buttonsStyling: false,
+    })
+
+    swalWithBootstrapButtons
+      .fire({
+        title: 'Voce tem certeza que deseja deletar?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sim, quero deletar!',
+        cancelButtonText: 'Não',
+        reverseButtons: true,
       })
-      .catch(() => toast.error('Algo deu errado'))
+      .then((result) => {
+        if (result.isConfirmed) {
+          api
+            .delete(`veiculo/${id}`, { data: { id } })
+            .then(() => {
+              fetchVehicles({ setVehiclesList, setIsLoading })
+              swalWithBootstrapButtons.fire(
+                'Deletado!',
+                'O Veículo foi deletado!',
+                'success',
+              )
+            })
+            .catch(() =>
+              swalWithBootstrapButtons.fire(
+                'Algo deu errado',
+                'O Veículo não foi deletado!',
+                'error',
+              ),
+            )
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire(
+            'Cancelado',
+            'O Veículo não foi deletado!',
+            'error',
+          )
+        }
+      })
   }
 
   useEffect(() => {
