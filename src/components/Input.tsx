@@ -18,7 +18,7 @@ export const Input = forwardRef(
         id={id}
         name={name}
         placeholder={placeholder}
-        className="mt-1 h-14 w-full rounded-lg border border-transparent bg-slate-100 p-4 text-gray-950 outline-none placeholder:text-gray-600 hover:border-gray-950 focus:border focus:border-blue-primary disabled:cursor-not-allowed disabled:border disabled:border-gray-400 disabled:text-gray-400"
+        className="mt-1 h-14 w-full rounded-lg border border-transparent bg-slate-100 p-4 text-gray-950 outline-none placeholder:text-gray-600 hover:border-gray-950 focus:border focus:border-blue-primary disabled:border disabled:border-gray-400 disabled:text-gray-400"
       />
     )
   },
