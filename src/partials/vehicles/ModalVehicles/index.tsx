@@ -144,7 +144,7 @@ export function ModalVehicles({
           <div className="mt-8 flex w-full justify-center">
             <Button
               className="xs:w-full lg:w-1/3"
-              title="Enviar"
+              title="Adicionar novo veículo"
               type="submit"
               icon={<PaperPlaneRight />}
             />

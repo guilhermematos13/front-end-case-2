@@ -38,4 +38,5 @@ export interface ClientFormInterface {
 
 export interface FetchClientsInterface {
   setClientList: Dispatch<SetStateAction<ClientInterface[]>>
+  setIsLoading?: Dispatch<SetStateAction<boolean>>
 }

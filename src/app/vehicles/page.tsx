@@ -15,6 +15,7 @@ import { ModalVehicles } from '../../partials/vehicles/ModalVehicles'
 export default function DriversPage() {
   const [openModal, setOpenModal] = useState(false)
   const [vehiclesList, setVehiclesList] = useState<VehicleInterface[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
   function handleChangeModal() {
     setOpenModal((prev) => !prev)
@@ -24,14 +25,14 @@ export default function DriversPage() {
     api
       .delete(`veiculo/${id}`, { data: { id } })
       .then(() => {
-        fetchVehicles({ setVehiclesList })
-        toast.success('Veiculo deletado com sucesso')
+        fetchVehicles({ setVehiclesList, setIsLoading })
+        toast.success('Veículo deletado com sucesso')
       })
       .catch(() => toast.error('Algo deu errado'))
   }
 
   useEffect(() => {
-    fetchVehicles({ setVehiclesList })
+    fetchVehicles({ setVehiclesList, setIsLoading })
   }, [])
 
   return (
@@ -50,12 +51,14 @@ export default function DriversPage() {
       </div>
       <div className="w-full border border-blue-primary/50" />
       <ModalVehicles
-        fetchVehicles={() => fetchVehicles({ setVehiclesList })}
+        fetchVehicles={() => fetchVehicles({ setVehiclesList, setIsLoading })}
         handleCloseModal={handleChangeModal}
         openModal={openModal}
       />
       <div className="w-full">
         <Table
+          isEmpty={vehiclesList.length === 0}
+          isLoading={isLoading}
           tHeadChildren={TableVehiclesData.map((data, index) => (
             <TableHeader
               key={index}

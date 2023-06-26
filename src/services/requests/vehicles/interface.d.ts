@@ -10,4 +10,5 @@ export interface VehicleInterface {
 
 export interface FetchVehiclesInterface {
   setVehiclesList: Dispatch<SetStateAction<VehicleInterface[]>>
+  setIsLoading?: Dispatch<SetStateAction<boolean>>
 }

@@ -197,7 +197,7 @@ export function CreateDisplacementModal({
           )}
         </div>
         <div className="mt-2">
-          <Label title="Selecione o Veiculo" />
+          <Label title="Selecione o Veículo" />
           <Select
             {...register('idVehicle', {
               required: true,
@@ -251,7 +251,7 @@ export function CreateDisplacementModal({
         <div className="mt-8 flex w-full justify-center">
           <Button
             className="xs:w-full lg:w-1/3"
-            title="Enviar"
+            title="Criar deslocamento"
             type="submit"
             icon={<PaperPlaneRight />}
           />

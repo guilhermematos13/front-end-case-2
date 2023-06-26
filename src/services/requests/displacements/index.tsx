@@ -4,7 +4,9 @@ import { fetchDisplacementInterface } from './interface'
 
 export const fetchDisplacements = ({
   setDisplacementsList,
+  setIsLoading,
 }: fetchDisplacementInterface) => {
+  setIsLoading(true)
   api
     .get('deslocamento')
     .then((response) => {
@@ -12,5 +14,8 @@ export const fetchDisplacements = ({
     })
     .catch(() => {
       toast.error('Algo deu errado no carregamento dos clientes')
+    })
+    .finally(() => {
+      setIsLoading(false)
     })
 }

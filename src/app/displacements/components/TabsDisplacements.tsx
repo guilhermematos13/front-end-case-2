@@ -16,17 +16,29 @@ interface TabsDisplacementsInterface {
   handleChangeFinishModal: (setDisplacementId: number) => void
   displacementsList: displacementInterface[]
   setDisplacementsList: Dispatch<SetStateAction<displacementInterface[]>>
+  isLoading: boolean
 }
 
 export function TabsDisplacements({
   handleChangeFinishModal,
   displacementsList,
   setDisplacementsList,
+  isLoading,
 }: TabsDisplacementsInterface) {
   const [selectedTab, setSelectedTab] = useState(0)
 
   const handleChange = (event, newValue) => {
     setSelectedTab(newValue)
+  }
+
+  function verificationEmpty(isFinished: boolean): boolean {
+    const verifyList = displacementsList.filter((displacement) =>
+      isFinished
+        ? displacement.fimDeslocamento !== null
+        : displacement.fimDeslocamento === null,
+    )
+    console.log(verifyList)
+    return verifyList.length === 0
   }
 
   function handleDeleteClient(id: number) {
@@ -48,6 +60,8 @@ export function TabsDisplacements({
       {selectedTab === 0 && (
         <div>
           <Table
+            isEmpty={verificationEmpty(false)}
+            isLoading={isLoading}
             tHeadChildren={TableInDisplacementsData.map((data, index) => (
               <TableHeader
                 key={index}
@@ -130,6 +144,8 @@ export function TabsDisplacements({
       {selectedTab === 1 && (
         <div>
           <Table
+            isEmpty={verificationEmpty(true)}
+            isLoading={isLoading}
             tHeadChildren={TableFinishDisplacementsData.map((data, index) => (
               <TableHeader
                 key={index}

@@ -22,7 +22,7 @@ export const TableInDisplacementsData: TableInDisplacementsDataInterface[] = [
     label: 'ID do Condutor',
   },
   {
-    label: 'ID do Veiculo',
+    label: 'ID do Veículo',
   },
   {
     label: 'ID do Cliente',

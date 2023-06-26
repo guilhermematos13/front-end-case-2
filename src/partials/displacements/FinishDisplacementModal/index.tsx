@@ -64,7 +64,7 @@ export function FinishDisplacementModal({
     <Modal closeModal={handleCloseModal} openModal={openFinishModal}>
       <div className="flex items-start justify-between">
         <Typography className="font-bold text-blue-primary xs:text-xl md:text-2xl">
-          Finalizar deslocamento {displacementId}
+          Finalizar deslocamento?
         </Typography>
         <button
           onClick={handleCloseModal}
@@ -120,7 +120,7 @@ export function FinishDisplacementModal({
         <div className="mt-8 flex w-full justify-center">
           <Button
             className="xs:w-full lg:w-1/3"
-            title="Enviar"
+            title="Finalizar deslocamento"
             type="submit"
             icon={<PaperPlaneRight />}
           />

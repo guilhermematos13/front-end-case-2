@@ -12,10 +12,10 @@ import { fetchClients } from '../../services/requests/clients'
 import { ClientInterface } from '../../services/requests/clients/interface'
 import { api } from '../../services/api'
 import { toast } from 'react-hot-toast'
-
 export default function ClientsPage() {
   const [openModal, setOpenModal] = useState(false)
   const [clientList, setClientList] = useState<ClientInterface[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
   function handleChangeModal() {
     setOpenModal((prev) => !prev)
@@ -25,14 +25,14 @@ export default function ClientsPage() {
     api
       .delete(`/cliente/${id}`, { data: { id } })
       .then(() => {
-        fetchClients({ setClientList })
+        fetchClients({ setClientList, setIsLoading })
         toast.success('Cliente deletado com sucesso')
       })
       .catch(() => toast.error('Algo deu errado'))
   }
 
   useEffect(() => {
-    fetchClients({ setClientList })
+    fetchClients({ setClientList, setIsLoading })
   }, [])
 
   return (
@@ -51,12 +51,14 @@ export default function ClientsPage() {
       </div>
       <div className="w-full border border-blue-primary/50" />
       <ModalClient
-        fetchClients={() => fetchClients({ setClientList })}
+        fetchClients={() => fetchClients({ setClientList, setIsLoading })}
         handleCloseModal={handleChangeModal}
         openModal={openModal}
       />
       <div className="w-full">
         <Table
+          isEmpty={clientList.length === 0}
+          isLoading={isLoading}
           tHeadChildren={TableClientsData.map((data, index) => (
             <TableHeader
               key={index}

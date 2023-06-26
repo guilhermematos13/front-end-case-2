@@ -176,7 +176,7 @@ export function ModalDrivers({
           <div className="mt-8 flex w-full justify-center">
             <Button
               className="xs:w-full lg:w-1/3"
-              title="Enviar"
+              title="Adicionar novo Condutor"
               type="submit"
               icon={<PaperPlaneRight />}
             />

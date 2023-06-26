@@ -33,7 +33,11 @@ export const fetchCity = ({ ufOption, setCityList }: FetchCityInterface) => {
     })
 }
 
-export const fetchClients = ({ setClientList }: FetchClientsInterface) => {
+export const fetchClients = ({
+  setClientList,
+  setIsLoading,
+}: FetchClientsInterface) => {
+  setIsLoading && setIsLoading(true)
   api
     .get('https://api-deslocamento.herokuapp.com/api/v1/cliente')
     .then((response) => {
@@ -41,5 +45,8 @@ export const fetchClients = ({ setClientList }: FetchClientsInterface) => {
     })
     .catch(() => {
       toast.error('Algo deu errado no carregamento dos clientes')
+    })
+    .finally(() => {
+      setIsLoading && setIsLoading(false)
     })
 }

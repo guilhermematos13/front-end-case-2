@@ -2,7 +2,11 @@ import toast from 'react-hot-toast'
 import { api } from '../../api'
 import { FetchDriverInterface } from './interface'
 
-export const fetchDrivers = ({ setDriverList }: FetchDriverInterface) => {
+export const fetchDrivers = ({
+  setDriverList,
+  setIsLoading,
+}: FetchDriverInterface) => {
+  setIsLoading && setIsLoading(true)
   api
     .get('condutor')
     .then((response) => {
@@ -10,5 +14,8 @@ export const fetchDrivers = ({ setDriverList }: FetchDriverInterface) => {
     })
     .catch(() => {
       toast.error('Algo deu errado no carregamento dos clientes')
+    })
+    .finally(() => {
+      setIsLoading && setIsLoading(false)
     })
 }

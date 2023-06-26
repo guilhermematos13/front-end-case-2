@@ -10,4 +10,5 @@ export interface DriverInterface {
 
 export interface FetchDriverInterface {
   setDriverList: Dispatch<SetStateAction<DriverInterface[]>>
+  setIsLoading?: Dispatch<SetStateAction<boolean>>
 }

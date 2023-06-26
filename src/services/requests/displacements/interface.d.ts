@@ -35,4 +35,5 @@ export interface finishDisplacementFormInterface {
 
 export interface fetchDisplacementInterface {
   setDisplacementsList: Dispatch<SetStateAction<displacementInterface[]>>
+  setIsLoading: Dispatch<SetStateAction<boolean>>
 }

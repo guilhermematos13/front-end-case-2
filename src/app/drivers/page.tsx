@@ -17,6 +17,7 @@ import { getFormatDate } from '../../utils/getFormatDate'
 export default function DriversPage() {
   const [openModal, setOpenModal] = useState(false)
   const [driverList, setDriverList] = useState<DriverInterface[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
   function handleChangeModal() {
     setOpenModal((prev) => !prev)
@@ -26,14 +27,14 @@ export default function DriversPage() {
     api
       .delete(`/condutor/${id}`, { data: { id } })
       .then(() => {
-        fetchDrivers({ setDriverList })
+        fetchDrivers({ setDriverList, setIsLoading })
         toast.success('Cliente deletado com sucesso')
       })
       .catch(() => toast.error('Algo deu errado'))
   }
 
   useEffect(() => {
-    fetchDrivers({ setDriverList })
+    fetchDrivers({ setDriverList, setIsLoading })
   }, [])
 
   return (
@@ -52,12 +53,14 @@ export default function DriversPage() {
       </div>
       <div className="w-full border border-blue-primary/50" />
       <ModalDrivers
-        fetchDriver={() => fetchDrivers({ setDriverList })}
+        fetchDriver={() => fetchDrivers({ setDriverList, setIsLoading })}
         handleCloseModal={handleChangeModal}
         openModal={openModal}
       />
       <div className="w-full">
         <Table
+          isEmpty={driverList.length === 0}
+          isLoading={isLoading}
           tHeadChildren={TableDriversData.map((data, index) => (
             <TableHeader
               key={index}

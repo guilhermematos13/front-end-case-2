@@ -16,6 +16,7 @@ export default function DisplacementsPage() {
   const [openModal, setOpenModal] = useState(false)
   const [openFinishModal, setOpenFinishModal] = useState(false)
   const [displacementId, setDisplacementId] = useState<number>()
+  const [isLoading, setIsLoading] = useState(true)
 
   function handleChangeCreateModal() {
     setOpenModal((prev) => !prev)
@@ -29,7 +30,7 @@ export default function DisplacementsPage() {
   }
 
   useEffect(() => {
-    fetchDisplacements({ setDisplacementsList })
+    fetchDisplacements({ setDisplacementsList, setIsLoading })
   }, [])
 
   return (
@@ -47,6 +48,7 @@ export default function DisplacementsPage() {
       <div className="w-full border border-blue-primary/50" />
 
       <TabsDisplacements
+        isLoading={isLoading}
         handleChangeFinishModal={handleChangeFinishModal}
         displacementsList={displacementsList}
         setDisplacementsList={setDisplacementsList}
@@ -55,14 +57,14 @@ export default function DisplacementsPage() {
         openModal={openModal}
         handleCloseModal={handleChangeCreateModal}
         fetchDisplacement={() => {
-          fetchDisplacements({ setDisplacementsList })
+          fetchDisplacements({ setDisplacementsList, setIsLoading })
         }}
       />
       <FinishDisplacementModal
         handleCloseModal={handleChangeFinishModal}
         openFinishModal={openFinishModal}
         fetchDisplacement={() => {
-          fetchDisplacements({ setDisplacementsList })
+          fetchDisplacements({ setDisplacementsList, setIsLoading })
         }}
         displacementId={displacementId}
       />
