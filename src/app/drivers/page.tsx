@@ -12,14 +12,24 @@ import { TableDriversData } from '../../data/TableDriversData'
 import { ModalDrivers } from '../../partials/drivers/ModalDrivers'
 import { getFormatDate } from '../../utils/getFormatDate'
 import { SwalAlert } from '../../components/SwalAlert'
+import { EditModalDrivers } from '../../partials/drivers/EditModalDrivers'
 
 export default function DriversPage() {
   const [openModal, setOpenModal] = useState(false)
+  const [openEditModal, setOpenEditModal] = useState(false)
+  const [idDriver, setIdDriver] = useState<number>()
   const [driverList, setDriverList] = useState<DriverInterface[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
   function handleChangeModal() {
     setOpenModal((prev) => !prev)
+  }
+
+  function handleChangeEditModal(id?: number) {
+    if (id) {
+      setIdDriver(id)
+    }
+    setOpenEditModal((prev) => !prev)
   }
 
   function handleDeleteClient(id: number) {
@@ -54,6 +64,13 @@ export default function DriversPage() {
         fetchDriver={() => fetchDrivers({ setDriverList, setIsLoading })}
         handleCloseModal={handleChangeModal}
         openModal={openModal}
+      />
+
+      <EditModalDrivers
+        fetchDriver={() => fetchDrivers({ setDriverList, setIsLoading })}
+        handleCloseModal={handleChangeEditModal}
+        openModal={openEditModal}
+        idDriver={idDriver}
       />
       <div className="w-full">
         <Table
@@ -90,7 +107,12 @@ export default function DriversPage() {
               <TableColumn
                 title={
                   <div className="flex w-full justify-center gap-2">
-                    <button className="rounded-md border border-blue-primary p-2 text-blue-primary hover:border-blue-950 hover:text-blue-900">
+                    <button
+                      onClick={() => {
+                        handleChangeEditModal(driver.id)
+                      }}
+                      className="rounded-md border border-blue-primary p-2 text-blue-primary hover:border-blue-950 hover:text-blue-900"
+                    >
                       <PencilLine size={20} />
                     </button>
                     <button

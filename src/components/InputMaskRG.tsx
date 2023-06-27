@@ -2,7 +2,6 @@ import { ForwardedRef, InputHTMLAttributes, forwardRef } from 'react'
 import InputMask from 'react-input-mask'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  onChange?: any
   value?: string
 }
 
