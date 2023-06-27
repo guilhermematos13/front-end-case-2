@@ -10,9 +10,8 @@ import { fetchDrivers } from '../../services/requests/drivers'
 import { DriverInterface } from '../../services/requests/drivers/interface'
 import { TableDriversData } from '../../data/TableDriversData'
 import { ModalDrivers } from '../../partials/drivers/ModalDrivers'
-import { toast } from 'react-hot-toast'
-import { api } from '../../services/api'
 import { getFormatDate } from '../../utils/getFormatDate'
+import { SwalAlert } from '../../components/SwalAlert'
 
 export default function DriversPage() {
   const [openModal, setOpenModal] = useState(false)
@@ -24,13 +23,12 @@ export default function DriversPage() {
   }
 
   function handleDeleteClient(id: number) {
-    api
-      .delete(`/condutor/${id}`, { data: { id } })
-      .then(() => {
-        fetchDrivers({ setDriverList, setIsLoading })
-        toast.success('Condutor deletado com sucesso')
-      })
-      .catch(() => toast.error('Algo deu errado'))
+    SwalAlert({
+      deleted: 'condutor',
+      id,
+      url: 'condutor',
+      fetchDelete: async () => fetchDrivers({ setDriverList, setIsLoading }),
+    })
   }
 
   useEffect(() => {

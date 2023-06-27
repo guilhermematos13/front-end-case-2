@@ -10,9 +10,8 @@ import { TableColumn } from '../../components/TableColumn'
 import { TableClientsData } from '../../data/TableClientsData'
 import { fetchClients } from '../../services/requests/clients'
 import { ClientInterface } from '../../services/requests/clients/interface'
-import { api } from '../../services/api'
-import { toast } from 'react-hot-toast'
 import { EditModalClient } from '../../partials/client/EditModalClient'
+import { SwalAlert } from '../../components/SwalAlert'
 export default function ClientsPage() {
   const [openModal, setOpenModal] = useState(false)
   const [openEditModal, setOpenEditModal] = useState(false)
@@ -32,13 +31,12 @@ export default function ClientsPage() {
   }
 
   function handleDeleteClient(id: number) {
-    api
-      .delete(`/cliente/${id}`, { data: { id } })
-      .then(() => {
-        fetchClients({ setClientList, setIsLoading })
-        toast.success('Cliente deletado com sucesso')
-      })
-      .catch(() => toast.error('Algo deu errado'))
+    SwalAlert({
+      deleted: 'cliente',
+      id,
+      url: 'cliente',
+      fetchDelete: async () => fetchClients({ setClientList, setIsLoading }),
+    })
   }
 
   useEffect(() => {

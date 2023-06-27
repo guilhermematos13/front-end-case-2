@@ -6,11 +6,10 @@ import { Table } from '../../../components/Table'
 import { TableHeader } from '../../../components/TableHeader'
 import { TableColumn } from '../../../components/TableColumn'
 import { Pause, Trash } from '@phosphor-icons/react'
-import { api } from '../../../services/api'
-import { toast } from 'react-hot-toast'
 import { TableInDisplacementsData } from '../../../data/TableInDisplacementsData copy'
 import { TableFinishDisplacementsData } from '../../../data/TableFinishedDisplacementsData'
 import { getFormatDate } from '../../../utils/getFormatDate'
+import { SwalAlert } from '../../../components/SwalAlert'
 
 interface TabsDisplacementsInterface {
   handleChangeFinishModal: (setDisplacementId: number) => void
@@ -43,13 +42,13 @@ export function TabsDisplacements({
   }
 
   function handleDeleteClient(id: number) {
-    api
-      .delete(`/deslocamento/${id}`, { data: { id } })
-      .then(() => {
-        fetchDisplacements({ setDisplacementsList, setIsLoading })
-        toast.success('Deslocamento deletado com sucesso')
-      })
-      .catch(() => toast.error('Algo deu errado'))
+    SwalAlert({
+      deleted: 'deslocamento',
+      id,
+      url: 'deslocamento',
+      fetchDelete: async () =>
+        fetchDisplacements({ setDisplacementsList, setIsLoading }),
+    })
   }
 
   return (
