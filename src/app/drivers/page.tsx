@@ -28,7 +28,7 @@ export default function DriversPage() {
       .delete(`/condutor/${id}`, { data: { id } })
       .then(() => {
         fetchDrivers({ setDriverList, setIsLoading })
-        toast.success('Cliente deletado com sucesso')
+        toast.success('Condutor deletado com sucesso')
       })
       .catch(() => toast.error('Algo deu errado'))
   }

@@ -13,7 +13,7 @@ export const fetchDrivers = ({
       setDriverList(response.data)
     })
     .catch(() => {
-      toast.error('Algo deu errado no carregamento dos clientes')
+      toast.error('Algo deu errado no carregamento dos condutores')
     })
     .finally(() => {
       setIsLoading && setIsLoading(false)

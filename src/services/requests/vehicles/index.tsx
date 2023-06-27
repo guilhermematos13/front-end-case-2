@@ -13,7 +13,7 @@ export const fetchVehicles = ({
       setVehiclesList(response.data)
     })
     .catch(() => {
-      toast.error('Algo deu errado no carregamento dos clientes')
+      toast.error('Algo deu errado no carregamento dos veículos')
     })
     .finally(() => {
       setIsLoading && setIsLoading(false)

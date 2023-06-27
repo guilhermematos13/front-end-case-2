@@ -10,11 +10,13 @@ import { useForm } from 'react-hook-form'
 import { Button } from '../../../components/Button'
 import { api } from '../../../services/api'
 import { toast } from 'react-hot-toast'
+import { useEffect } from 'react'
 
-export function ModalVehicles({
+export function ModalEditVehicles({
   handleCloseModal,
   openModal,
   fetchVehicles,
+  idVehicle,
 }: ModalVehiclesProps) {
   const {
     register,
@@ -33,8 +35,8 @@ export function ModalVehicles({
 
   const handleSubmitData = (data: VehiclesFormInterface) => {
     api
-      .post('veiculo', {
-        placa: data.licensePlate,
+      .put(`veiculo/${idVehicle}`, {
+        id: idVehicle,
         marcaModelo: data.brandModel,
         anoFabricacao: data.year,
         kmAtual: data.currentKm,
@@ -43,18 +45,29 @@ export function ModalVehicles({
         handleCloseModal()
         fetchVehicles()
         reset()
-        toast.success('Veículo criado com sucesso!')
+        toast.success('Veículo Editado com Sucesso!')
       })
       .catch(() => {
         toast.error('Algo deu errado!')
       })
   }
 
+  useEffect(() => {
+    openModal &&
+      idVehicle &&
+      api.get(`veiculo/${idVehicle}`).then((response) => {
+        setValue('brandModel', response.data.marcaModelo)
+        setValue('currentKm', response.data.kmAtual)
+        setValue('licensePlate', response.data.placa)
+        setValue('year', response.data.anoFabricacao)
+      })
+  }, [setValue, idVehicle, openModal])
+
   return (
     <Modal closeModal={handleCloseModal} openModal={openModal}>
       <div className="flex items-start justify-between">
         <Typography className="font-bold text-blue-primary xs:text-xl md:text-2xl">
-          Inserir novo veículo
+          Editar veículo
         </Typography>
         <button
           onClick={handleCloseModal}
@@ -69,7 +82,7 @@ export function ModalVehicles({
           <div className="flex flex-col">
             <Label title="Placa do Veículo" htmlFor="name" />
             <Input
-              {...register('licensePlate', { required: true })}
+              {...register('licensePlate', { required: true, disabled: true })}
               name="name"
               id="name"
               placeholder="Digite a placa do veículo"
@@ -144,7 +157,7 @@ export function ModalVehicles({
           <div className="mt-8 flex w-full justify-center">
             <Button
               className="xs:w-full lg:w-1/3"
-              title="Adicionar novo veículo"
+              title="Editar veículo"
               type="submit"
               icon={<PaperPlaneRight />}
             />

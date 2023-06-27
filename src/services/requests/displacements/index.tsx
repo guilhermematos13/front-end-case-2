@@ -13,7 +13,7 @@ export const fetchDisplacements = ({
       setDisplacementsList(response.data)
     })
     .catch(() => {
-      toast.error('Algo deu errado no carregamento dos clientes')
+      toast.error('Algo deu errado no carregamento dos deslocamentos')
     })
     .finally(() => {
       setIsLoading(false)

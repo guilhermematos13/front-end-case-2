@@ -48,7 +48,6 @@ export function EditModalClient({
   })
 
   const handleSubmitData = (data: ClientFormInterface) => {
-    console.log(data)
     api
       .put(`cliente/${idClient}`, {
         id: idClient,
