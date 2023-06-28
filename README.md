@@ -69,4 +69,7 @@ Run Tests / Rodar os Testes
 
 ## Deploy Link
 
-- [Deploy](https://github-blog-two-theta.vercel.app/)
+- [Deploy](https://gestao-de-deslocamento-gb5qhv1rq-guilhermematos13.vercel.app/)
+* Por algum motivo o deploy da aplicação não segue fielmente o layout que desenvolvi, já tinha enfrentado algumas instabilidades com essa plataforma mas achei que valia a pena realizar o deploy assim mesmo. Obrigado!
+
+
