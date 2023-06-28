@@ -1,4 +1,9 @@
-export default {
+import nextJest from 'next/jest'
+const createJestConfig = nextJest({
+  dir: './',
+})
+
+const customJestConfig = {
   testEnvironment: 'jsdom',
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
@@ -8,5 +13,7 @@ export default {
       require.resolve('jest-transform-stub'),
   },
 
-  setupFilesAfterEnv: ['<rootDir>/src/jest/setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/setupTests.ts'],
 }
+
+module.exports = createJestConfig(customJestConfig)
