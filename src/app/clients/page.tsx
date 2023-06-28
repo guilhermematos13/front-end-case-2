@@ -49,13 +49,11 @@ export default function ClientsPage() {
         <h1 className="font-bold text-blue-primary xs:text-base md:text-xl lg:text-3xl">
           Clientes
         </h1>
-        <div>
-          <Button
-            icon={<User size={20} weight="fill" />}
-            title="Criar um novo cliente"
-            onClick={handleChangeModal}
-          />
-        </div>
+        <Button
+          icon={<User size={20} weight="fill" />}
+          title="Criar um novo cliente"
+          onClick={handleChangeModal}
+        />
       </div>
       <div className="w-full border border-blue-primary/50" />
       <ModalClient

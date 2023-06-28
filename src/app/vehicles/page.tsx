@@ -50,13 +50,11 @@ export default function DriversPage() {
         <h1 className="font-bold text-blue-primary xs:text-base md:text-xl lg:text-3xl">
           Veículos
         </h1>
-        <div>
-          <Button
-            icon={<Car size={20} weight="fill" />}
-            title="Inserir um novo veículo"
-            onClick={handleChangeModal}
-          />
-        </div>
+        <Button
+          icon={<Car size={20} weight="fill" />}
+          title="Inserir um novo veículo"
+          onClick={handleChangeModal}
+        />
       </div>
       <div className="w-full border border-blue-primary/50" />
       <ModalVehicles

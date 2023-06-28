@@ -51,13 +51,11 @@ export default function DriversPage() {
         <h1 className="font-bold text-blue-primary xs:text-base md:text-xl lg:text-3xl">
           Condutores
         </h1>
-        <div>
-          <Button
-            icon={<SteeringWheel size={20} weight="fill" />}
-            title="Criar um novo condutor"
-            onClick={handleChangeModal}
-          />
-        </div>
+        <Button
+          icon={<SteeringWheel size={20} weight="fill" />}
+          title="Criar um novo condutor"
+          onClick={handleChangeModal}
+        />
       </div>
       <div className="w-full border border-blue-primary/50" />
       <ModalDrivers

@@ -27,7 +27,7 @@ export const MenuBannersData: MenuBannersDataProps[] = [
     route: '/drivers',
   },
   {
-    title: 'Veiculos',
+    title: 'Veículos',
     image: CarPhoto,
     description:
       'Veículos são meios de transporte que proporcionam mobilidade e transporte de pessoas e/ou carga. Eles vêm em diferentes formas, como carros, caminhões, motocicletas, bicicletas, ônibus e trens, entre outros.',

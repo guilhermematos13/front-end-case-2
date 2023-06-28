@@ -40,7 +40,7 @@ export default function Header() {
   }
 
   return (
-    <div>
+    <>
       <Drawer anchor="left" open={openSideMenu} onClose={handleSideMenuChange}>
         <List className="flex h-screen flex-col items-end bg-slate-300/50 px-4">
           <button
@@ -92,14 +92,12 @@ export default function Header() {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static" className="bg-blue-primary">
           <Toolbar className="flex justify-between xs:px-4 md:px-10 lg:px-14">
-            <div>
-              <IconButton
-                onClick={handleSideMenuChange}
-                className="rounded-full text-slate-100 hover:bg-slate-100/10"
-              >
-                <ListIcon size={28} />
-              </IconButton>
-            </div>
+            <IconButton
+              onClick={handleSideMenuChange}
+              className="rounded-full text-slate-100 hover:bg-slate-100/10"
+            >
+              <ListIcon size={28} />
+            </IconButton>
             <Typography
               variant="h5"
               className="text-center text-slate-100 xs:text-sm sm:text-lg md:text-2xl"
@@ -110,6 +108,6 @@ export default function Header() {
           </Toolbar>
         </AppBar>
       </Box>
-    </div>
+    </>
   )
 }
