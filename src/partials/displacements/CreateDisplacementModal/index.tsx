@@ -157,9 +157,9 @@ export function CreateDisplacementModal({
           </div>
         </div>
         <div className="flex w-full flex-col gap-2">
-          <Label title="Checklist" htmlFor="reason" />
+          <Label title="Checklist" htmlFor="checkList" />
           <TextArea
-            {...register('reason', { required: true })}
+            {...register('checkList', { required: true })}
             placeholder="Digite o checklist"
             name="checkList"
             id="checkList"
