@@ -2,7 +2,7 @@ export interface ModalVehiclesProps {
   handleCloseModal: () => void
   openModal: boolean
   fetchVehicles: () => void
-  idVehicle: number
+  idVehicle: number | undefined
 }
 
 export interface VehiclesFormInterface {

@@ -2,7 +2,7 @@ export interface ModalDriverProps {
   handleCloseModal: () => void
   openModal: boolean
   fetchDriver: () => void
-  idDriver: number
+  idDriver: number | undefined
 }
 
 export interface DriverFormInterface {

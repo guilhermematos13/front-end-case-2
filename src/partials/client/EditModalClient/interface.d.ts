@@ -12,5 +12,5 @@ export interface ModalClientProps {
   handleCloseModal: () => void
   openEditModal: boolean
   fetchClients: () => void
-  idClient: number
+  idClient: number | undefined
 }

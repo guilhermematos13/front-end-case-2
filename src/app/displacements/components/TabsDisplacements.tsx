@@ -1,5 +1,5 @@
 import { Tabs, Tab } from '@mui/material'
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction, SyntheticEvent, useState } from 'react'
 import { fetchDisplacements } from '../../../services/requests/displacements'
 import { displacementInterface } from '../../../services/requests/displacements/interface'
 import { Table } from '../../../components/Table'
@@ -28,7 +28,10 @@ export function TabsDisplacements({
 }: TabsDisplacementsInterface) {
   const [selectedTab, setSelectedTab] = useState(0)
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (
+    _: SyntheticEvent<Element, Event>,
+    newValue: number,
+  ) => {
     setSelectedTab(newValue)
   }
 
