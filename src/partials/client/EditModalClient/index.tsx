@@ -117,7 +117,7 @@ export function EditModalClient({
         <LoadingTable />
       ) : (
         <>
-          <form onSubmit={handleSubmit((data) => handleSubmitData(data))}>
+          <form onSubmit={handleSubmit(handleSubmitData)}>
             <div className="flex w-full flex-col">
               <Label title="Nome:" htmlFor="name" />
               <Input

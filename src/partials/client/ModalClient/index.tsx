@@ -91,7 +91,7 @@ export function ModalClient({
         </button>
       </div>
       <div className="my-6 border border-blue-primary"></div>
-      <form onSubmit={handleSubmit((data) => handleSubmitData(data))}>
+      <form onSubmit={handleSubmit(handleSubmitData)}>
         <div className="flex w-full flex-col">
           <Label title="Nome:" htmlFor="name" />
           <Input

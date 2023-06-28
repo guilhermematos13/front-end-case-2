@@ -91,7 +91,7 @@ export function CreateDisplacementModal({
         </button>
       </div>
       <div className="my-6 border border-blue-primary"></div>
-      <form onSubmit={handleSubmit((data) => handleSubmitData(data))}>
+      <form onSubmit={handleSubmit(handleSubmitData)}>
         <div className="flex w-full items-start gap-2 xs:flex-col lg:flex-row">
           <div className="flex w-full flex-col gap-2">
             <Label title="KM Inicial" />

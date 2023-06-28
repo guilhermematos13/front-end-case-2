@@ -6,7 +6,7 @@ import {
 import { ForwardedRef, ReactNode, forwardRef } from 'react'
 
 interface SelectProps {
-  value: string | string[]
+  value: string | undefined
   onChange: (event: SelectChangeEvent) => void
   children: ReactNode
   isMultiple?: true
