@@ -76,7 +76,7 @@ export default function Header() {
                       <User size={24} />
                     ) : menu.title === 'Condutores' ? (
                       <SteeringWheel size={24} />
-                    ) : menu.title === 'Veiculos' ? (
+                    ) : menu.title === 'Veículos' ? (
                       <Car size={24} />
                     ) : (
                       <RoadHorizon size={24} />
