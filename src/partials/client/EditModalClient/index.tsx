@@ -66,6 +66,9 @@ export function EditModalClient({
         fetchClients()
         handleCloseModal()
       })
+      .catch((error) => {
+        toast.error(error.response.data ?? 'Algo deu errado!')
+      })
   }
 
   useEffect(() => {

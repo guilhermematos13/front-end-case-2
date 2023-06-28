@@ -45,8 +45,8 @@ export function ModalVehicles({
         reset()
         toast.success('Veículo criado com sucesso!')
       })
-      .catch(() => {
-        toast.error('Algo deu errado!')
+      .catch((error) => {
+        toast.error(error.response.data ?? 'Algo deu errado!')
       })
   }
 

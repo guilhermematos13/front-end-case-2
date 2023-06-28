@@ -50,6 +50,9 @@ export function FinishDisplacementModal({
         fetchDisplacement()
         handleCloseModal()
       })
+      .catch((error) => {
+        toast.error(error.response.data ?? 'Algo deu errado!')
+      })
   }
 
   useEffect(() => {
