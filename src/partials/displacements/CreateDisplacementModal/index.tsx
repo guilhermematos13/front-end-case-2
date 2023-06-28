@@ -57,7 +57,6 @@ export function CreateDisplacementModal({
   }, [])
 
   const handleSubmitData = (data: createDisplacementFormInterface) => {
-    console.log(data.startDisplacement)
     api
       .post('/deslocamento/iniciardeslocamento', {
         kmInicial: data.currentKm,

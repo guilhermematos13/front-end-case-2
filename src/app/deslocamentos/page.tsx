@@ -35,7 +35,7 @@ export default function DisplacementsPage() {
 
   return (
     <div className="mt-20 flex h-screen flex-col px-48 xs:px-4 md:px-10 lg:px-14">
-      <div className="mb-6 flex w-full items-center justify-between">
+      <div className="mb-6 flex w-full items-center justify-between xs:flex-col xs:gap-2 sm:flex-row sm:gap-0">
         <h1 className="font-bold text-blue-primary xs:text-base md:text-xl lg:text-3xl">
           Deslocamentos
         </h1>

@@ -69,7 +69,6 @@ export function EditModalDrivers({
     openModal &&
       idDriver &&
       api.get(`condutor/${idDriver}`).then((response) => {
-        console.log(response.data.vencimentoHabilitacao)
         setValue('name', response.data.nome)
         setValue('documentNumber', response.data.numeroHabilitacao)
         setValue(
